@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 # Main views import
-from trainingapps.views import main
+from trainingapps.views import index
 # Table ContactUs generation fake data's
 from trainingapps.views import gen_fake_info
 # Table Rate get currency value
@@ -26,7 +26,7 @@ from trainingapps.views import get_currency_info
 from trainingapps.views import dbshow
 
 urlpatterns = [
-    path('', main),
+    path('', index),
 
     # ContactUs model
     path('geninfo/emaildata/', gen_fake_info),
@@ -35,7 +35,8 @@ urlpatterns = [
     path('getinfo/currencydata/', get_currency_info),
 
     # General function database
-    path('data/txt/', dbshow),
+    path('data/', dbshow),
 
+    # Other
     path('admin/', admin.site.urls),
 ]

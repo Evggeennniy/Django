@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block rate %}
+    <a href="/">HOME</a>
+    
+    <p>{{ message }}</p>
+
+    {% for data in datalist %}
+        <div> id : {{data.id}} Ccy : {{data.ccy}} Base_ccy : {{data.base_ccy}} Buy : {{data.buy}} Sell : {{data.sell}}</div>
+    {% endfor %}
+{% endblock rate %}
+
+{% block contactus %}
+    <a href="/">HOME</a>
+
+    <p>{{ message }}</p>
+
+    {% for data in datalist %}
+        <div> id : {{data.id}} Email from : {{data.email_from}} Email to : {{data.email_to}} Subject : {{data.subject}} Message : {{data.message}}</div>
+    {% endfor %}
+{% endblock contactus %}
