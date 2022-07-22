@@ -1,6 +1,6 @@
 from trainingapps.models import ContactUs, Rate
 from django.http import HttpResponse
-# from django.shortcuts import render
+from django.shortcuts import render
 from faker import Faker
 import requests
 
@@ -8,9 +8,8 @@ import requests
 fake = Faker()
 
 
-def main(request):  # Show main page
-
-    return HttpResponse("This is main page!")
+def index(request):
+    return render(request, "index.html")
 
 
 def gen_fake_info(request):  # Gen fake data
@@ -49,40 +48,21 @@ def dbshow(request):  # Show info from db
 
     db = str(request.GET.get("db"))
 
-    if db == "ContactUs":
-        data_list = list()
-        for data in ContactUs.objects.all():
+    if db == "rate":
+        context = {
+            "message": "Сurrent currency table",
+            "datalist": Rate.objects.all(),
 
-            text = f"""
-            id : {data.id}<br>
-            Email from : {data.email_from}<br>
-            Email to : {data.email_to}<br>
-            Object : {data.subject}<br>
-            Message : {data.message}<br><br>"""
+            "db": db
+        }
+        return render(request, "datalist.html", context=context)
+    elif db == "contactus":
+        context = {
+            "message": "Link table",
+            "datalist": ContactUs.objects.all(),
 
-            data_list.append(text)
-
-        return HttpResponse(data_list)
-
-    elif db == "Rate":
-        data_list = list()
-        for data in Rate.objects.all():
-
-            text = f"""
-            id : {data.id}<br>
-            Currency : {data.ccy}<br>
-            Base currency : {data.base_ccy}<br>
-            Buy : {float(data.buy)}<br>
-            Sell : {float(data.sell)}<br><br>"""
-
-            data_list.append(text)
-
-        return HttpResponse(data_list)
-
+            "db": db
+        }
+        return render(request, "datalist.html", context=context)
     else:
-        return HttpResponse("Please, chose table /data/txt/?dbshow=...nameDB")
-
-# def show_info_html(request):
-
-#     return render()
-#     pass
+        return HttpResponse("Please, chose database data/?db=...namedb")
