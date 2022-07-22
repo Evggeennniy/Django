@@ -5,17 +5,48 @@
     
     <p>{{ message }}</p>
 
+<table> 
+    <tr>
+        <th style="background-color: yellow">__id__</th>
+        <th style="background-color: green">__Ccy__</th>
+        <th style="background-color: green">__Base_ccy__</th>
+        <th style="background-color: red">____Buy____</th>
+        <th style="background-color: blue">____Sell____</th>
+    </tr>
     {% for data in datalist %}
-        <div> id : {{data.id}} Ccy : {{data.ccy}} Base_ccy : {{data.base_ccy}} Buy : {{data.buy}} Sell : {{data.sell}}</div>
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.ccy}}</td>
+        <td style="background-color: green">{{data.base_ccy}}</td>
+        <td style="background-color: red">{{data.buy}}</td>
+        <td style="background-color: blue">{{data.sell}}</td>
+    </tr>
     {% endfor %}
+
 {% endblock rate %}
+
 
 {% block contactus %}
     <a href="/">HOME</a>
 
     <p>{{ message }}</p>
 
+<table>
+    <tr>
+        <th style="background-color: yellow">__id__</th>
+        <th style="background-color: green">__Email from__</th>
+        <th style="background-color: green">__Email to__</th>
+        <th style="background-color: red">__Subject__</th>
+        <th style="background-color: blue">__Message__</th>
+    </tr>
     {% for data in datalist %}
-        <div> id : {{data.id}} Email from : {{data.email_from}} Email to : {{data.email_to}} Subject : {{data.subject}} Message : {{data.message}}</div>
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.email_from}}</td>
+        <td style="background-color: green">{{data.email_to}}</td>
+        <td style="background-color: red">{{data.subject}}</td>
+        <td style="background-color: blue">{{data.message}}</td>
+    </tr>
     {% endfor %}
+
 {% endblock contactus %}
