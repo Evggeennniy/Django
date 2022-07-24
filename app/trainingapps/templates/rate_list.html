@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block table %}
+    <a href="/">HOME</a>
+    
+    <p>{{ message }}</p>
+
+<table> 
+    <tr>
+        <th style="background-color: yellow">__id__</th>
+        <th style="background-color: green">__Ccy__</th>
+        <th style="background-color: green">__Base_ccy__</th>
+        <th style="background-color: red">____Buy____</th>
+        <th style="background-color: blue">____Sell____</th>
+    </tr>
+    {% for data in datalist %}
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.ccy}}</td>
+        <td style="background-color: green">{{data.base_ccy}}</td>
+        <td style="background-color: red">{{data.buy}}</td>
+        <td style="background-color: blue">{{data.sell}}</td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}

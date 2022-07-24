@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="/">HOME</a>
+    <p>{{ message }}</p>
+    <a href="/data/source/create">Create new data.</a>
+
+
+<table> 
+    <tr>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Name</th>
+        <th style="background-color: green">Source URL</th>
+        <th style="background-color: white"></th>
+        <th style="background-color: white"></th>
+    </tr>
+    {% for data in datalist %}
+    <tr>
+        <td style="background-color: yellow">{{ data.id }}</td>
+        <td style="background-color: green">{{ data.name }}</td>
+        <td style="background-color: green">{{ data.source_url }}</td>
+        <td style="background-color: white"><a href="/data/source/detail/{{ data.id }}">View Details</a></td>
+        <td style="background-color: white"><a href="/data/source/update/{{ data.id }}">Edit</a></td>
+        <td style="background-color: white"><a href="/data/source/delete/{{ data.id }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}

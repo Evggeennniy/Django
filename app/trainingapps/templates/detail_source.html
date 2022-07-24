@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="/">HOME</a>
+    <p>{{ message }}</p>
+    <a href="/data/source">BACK</a>
+    <div></div>
+    <div>ID: {{ data.id }} </div>
+    <div>Name: {{ data.name }} </div>
+    <div>Source url: {{ data.source_url }} </div>
+
+{% endblock table %}

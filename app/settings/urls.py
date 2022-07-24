@@ -16,26 +16,35 @@ Including another URLconf
 # Default import
 from django.contrib import admin
 from django.urls import path
-# Main views import
+# Main
 from trainingapps.views import index
-# Table ContactUs generation fake data's
-from trainingapps.views import gen_fake_info
-# Table Rate get currency value
-from trainingapps.views import get_currency_info
-# General functions
-from trainingapps.views import dbshow
+# Functions
+from trainingapps.views import gen_fake_info, get_currency_info, gen_source_info
+# Table's
+from trainingapps.views import show_ratelist, show_contactuslist, show_sourcelist
+# Forms
+from trainingapps.views import create_source, update_source, detail_source, delete_source
+
 
 urlpatterns = [
+    # Main page
     path('', index),
 
-    # ContactUs model
+    # ContactUs page's
     path('geninfo/emaildata/', gen_fake_info),
+    path('data/contactus', show_contactuslist),
 
-    # Rate model
+    # Rate page's
     path('getinfo/currencydata/', get_currency_info),
+    path('data/rate', show_ratelist),
 
-    # General function database
-    path('data/', dbshow),
+    # Source page's
+    path('geninfo/source', gen_source_info),
+    path('data/source', show_sourcelist),
+    path('data/source/create', create_source),
+    path('data/source/update/<int:idin>', update_source),
+    path('data/source/detail/<int:idin>', detail_source),
+    path('data/source/delete/<int:idin>', delete_source),
 
     # Other
     path('admin/', admin.site.urls),
