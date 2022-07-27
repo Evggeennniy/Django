@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Delete Source Data</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="{% url 'source_list' %}">BACK</a>
+    </form>
+
+{% endblock table %} 

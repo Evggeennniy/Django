@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block table %}
+    <a href="{% url 'main' %}">HOME</a>
+    
+    <p>Rate list</p>
+
+<table> 
+    <tr>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Ccy</th>
+        <th style="background-color: green">Base_ccy</th>
+        <th style="background-color: red">Buy</th>
+        <th style="background-color: blue">Sell</th>
+    </tr>
+    {% for data in object_list %}
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.ccy}}</td>
+        <td style="background-color: green">{{data.base_ccy}}</td>
+        <td style="background-color: red">{{data.buy}}</td>
+        <td style="background-color: blue">{{data.sell}}</td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}

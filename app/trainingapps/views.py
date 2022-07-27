@@ -1,68 +1,66 @@
-from trainingapps.models import ContactUs, Rate
-from django.http import HttpResponse
-from django.shortcuts import render
-from faker import Faker
-import requests
-
-# Create your views here.
-fake = Faker()
+from django.urls import reverse_lazy
+from trainingapps.models import ContactUs, Rate, Source
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from trainingapps.forms import SourceForm
 
 
-def index(request):
-    return render(request, "index.html")
+"""
+WORKING WITH PAGES
+"""
 
 
-def gen_fake_info(request):  # Gen fake data
-    for _ in range(10):
-
-        acc = ContactUs(
-            email_from=fake.email(),
-            email_to=fake.email(),
-            subject=fake.text(20),
-            message=fake.text(30))
-        acc.save()
-
-    return HttpResponse("Data gen!")
+class IndexView(TemplateView):
+    template_name = "index.html"
 
 
-def get_currency_info(request):  # Gen currency information PRIVATBANK
+class RateListView(ListView):
+    queryset = Rate.objects.all()  # Selected db
 
-    url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
-
-    req = requests.get(url)
-    data_list = req.json()
-
-    for data in data_list:
-
-        rate = Rate(
-            ccy=data.get("ccy", "Empty or Failed"),
-            base_ccy=data.get("base_ccy", "Empty or Failed"),
-            buy=data.get("buy", "Empty or Failed"),
-            sell=data.get("sale", "Empty or Failed"))
-        rate.save()
-
-    return HttpResponse("Data's succesfull save!")
+    template_name = "rate_list.html"
 
 
-def dbshow(request):  # Show info from db
+class ContactUsListView(ListView):
+    queryset = ContactUs.objects.all()  # Selected db
 
-    db = str(request.GET.get("db"))
+    template_name = "contactus_list.html"
 
-    if db == "rate":
-        context = {
-            "message": "Сurrent currency table",
-            "datalist": Rate.objects.all(),
 
-            "db": db
-        }
-        return render(request, "datalist.html", context=context)
-    elif db == "contactus":
-        context = {
-            "message": "Link table",
-            "datalist": ContactUs.objects.all(),
+class SourceListView(ListView):
+    queryset = Source.objects.all()  # Selected db
 
-            "db": db
-        }
-        return render(request, "datalist.html", context=context)
-    else:
-        return HttpResponse("Please, chose database data/?db=...namedb")
+    template_name = "source_list.html"
+
+
+"""
+WORKING WITH SOURCE
+"""
+
+
+class SourceCreateView(CreateView):
+    queryset = SourceListView.queryset
+    form_class = SourceForm
+    success_url = reverse_lazy("source_list")
+
+    template_name = "create_source.html"
+
+
+class SourceDetailsView(DeleteView):
+    queryset = SourceListView.queryset
+
+    template_name = "detail_source.html"
+
+
+class SourceUpdateView(UpdateView):
+    queryset = SourceListView.queryset
+    form_class = SourceForm
+    success_url = reverse_lazy("source_list")
+
+    template_name = "update_source.html"
+
+
+class SourceDeleteView(DeleteView):
+    queryset = SourceListView.queryset
+    extra_context = {"database": queryset}
+    success_url = reverse_lazy("source_list")
+
+    template_name = "delete_source.html"

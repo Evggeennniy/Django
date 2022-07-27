@@ -15,28 +15,17 @@ Including another URLconf
 """
 # Default import
 from django.contrib import admin
-from django.urls import path
-# Main views import
-from trainingapps.views import index
-# Table ContactUs generation fake data's
-from trainingapps.views import gen_fake_info
-# Table Rate get currency value
-from trainingapps.views import get_currency_info
-# General functions
-from trainingapps.views import dbshow
+from django.urls import include, path
+
+# Main
+from trainingapps.views import IndexView
 
 urlpatterns = [
-    path('', index),
-
-    # ContactUs model
-    path('geninfo/emaildata/', gen_fake_info),
-
-    # Rate model
-    path('getinfo/currencydata/', get_currency_info),
-
-    # General function database
-    path('data/', dbshow),
-
+    # Main page
+    path('', IndexView.as_view(), name='main'),
+    # Include
+    path('data/', include('trainingapps.urls'), name='main'),
     # Other
     path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

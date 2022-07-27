@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Source list</p>
+    <a href="{% url 'source_create' %}">Create new data.</a>
+
+
+<table> 
+    <tr>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Name</th>
+        <th style="background-color: green">Source URL</th>
+    </tr>
+    {% for data in object_list %}
+    <tr>
+        <td style="background-color: yellow">{{ data.id }}</td>
+        <td style="background-color: green">{{ data.name }}</td>
+        <td style="background-color: green">{{ data.source_url }}</td>
+        <td style="background-color: white"><a href="{% url 'source_detail' data.id %}">View Details</a></td>
+        <td style="background-color: white"><a href="{% url 'source_update' data.id %}">Edit</a></td>
+        <td style="background-color: white"><a href="{% url 'source_delete' data.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block table %}
+    <a href="{% url 'main' %}">HOME</a>
+
+    <p>ContactUs list</p>
+
+<table>
+    <tr>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Email from</th>
+        <th style="background-color: green">Email to</th>
+        <th style="background-color: red">Subject</th>
+        <th style="background-color: blue">Message</th>
+    </tr>
+    {% for data in object_list %}
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.email_from}}</td>
+        <td style="background-color: green">{{data.email_to}}</td>
+        <td style="background-color: red">{{data.subject}}</td>
+        <td style="background-color: blue">{{data.message}}</td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}
