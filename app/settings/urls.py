@@ -15,37 +15,17 @@ Including another URLconf
 """
 # Default import
 from django.contrib import admin
-from django.urls import path
-# Main
-from trainingapps.views import index
-# Functions
-from trainingapps.views import gen_fake_info, get_currency_info, gen_source_info
-# Table's
-from trainingapps.views import show_ratelist, show_contactuslist, show_sourcelist
-# Forms
-from trainingapps.views import create_source, update_source, detail_source, delete_source
+from django.urls import include, path
 
+# Main
+from trainingapps.views import IndexView
 
 urlpatterns = [
     # Main page
-    path('', index),
-
-    # ContactUs page's
-    path('geninfo/emaildata/', gen_fake_info),
-    path('data/contactus', show_contactuslist),
-
-    # Rate page's
-    path('getinfo/currencydata/', get_currency_info),
-    path('data/rate', show_ratelist),
-
-    # Source page's
-    path('geninfo/source', gen_source_info),
-    path('data/source', show_sourcelist),
-    path('data/source/create', create_source),
-    path('data/source/update/<int:idin>', update_source),
-    path('data/source/detail/<int:idin>', detail_source),
-    path('data/source/delete/<int:idin>', delete_source),
-
+    path('', IndexView.as_view(), name='main'),
+    # Include
+    path('data/', include('trainingapps.urls'), name='main'),
     # Other
     path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]

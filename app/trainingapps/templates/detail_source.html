@@ -2,12 +2,12 @@
 
 {% block table %}
 
-    <a href="/">HOME</a>
-    <p>{{ message }}</p>
-    <a href="/data/source">BACK</a>
-    <div></div>
-    <div>ID: {{ data.id }} </div>
-    <div>Name: {{ data.name }} </div>
-    <div>Source url: {{ data.source_url }} </div>
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Details Source Data</p>
+    
+    <div>ID: {{ object.id }}</div>
+    <div>Name: {{ object.name }}</div>
+    <div>Source url: {{ object.source_url }}</div>
+    <a href="{% url 'source_list' %}">BACK</a>
 
 {% endblock table %}

@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block table %}
-    <a href="/">HOME</a>
+    <a href="{% url 'main' %}">HOME</a>
     
-    <p>{{ message }}</p>
+    <p>Rate list</p>
 
 <table> 
     <tr>
-        <th style="background-color: yellow">__id__</th>
-        <th style="background-color: green">__Ccy__</th>
-        <th style="background-color: green">__Base_ccy__</th>
-        <th style="background-color: red">____Buy____</th>
-        <th style="background-color: blue">____Sell____</th>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Ccy</th>
+        <th style="background-color: green">Base_ccy</th>
+        <th style="background-color: red">Buy</th>
+        <th style="background-color: blue">Sell</th>
     </tr>
-    {% for data in datalist %}
+    {% for data in object_list %}
     <tr>
         <td style="background-color: yellow">{{data.id}}</td>
         <td style="background-color: green">{{data.ccy}}</td>

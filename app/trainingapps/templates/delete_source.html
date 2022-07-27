@@ -2,13 +2,13 @@
 
 {% block table %}
 
-    <a href="/">HOME</a>
-    <p>{{ message }}</p>
-    <a href="/data/source">BACK</a>
-
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Delete Source Data</p>
+    
     <form method="post">
         {% csrf_token %}
         <button type="submit">Delete</button>
+        <a href="{% url 'source_list' %}">BACK</a>
     </form>
 
 {% endblock table %} 
