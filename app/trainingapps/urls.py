@@ -18,16 +18,25 @@ from django.urls import path
 # ListView
 from trainingapps.views import ContactUsListView, RateListView, SourceListView
 # EditView
+from trainingapps.views import RateCreateView, RateUpdateView, RateDeleteView, RateDetailsView
 from trainingapps.views import SourceCreateView, SourceUpdateView, SourceDeleteView, SourceDetailsView
-# Forms
+from trainingapps.views import ContactUsCreateView, ContactUsUpdateView, ContactUsDeleteView, ContactUsDetailsView
 
 
 urlpatterns = [
-    # ContactUs page's
-    path('contactus', ContactUsListView.as_view(), name='contactus_list'),
-
     # Rate page's
     path('rate', RateListView.as_view(), name='rate_list'),
+    path('rate/create', RateCreateView.as_view(), name='rate_create'),
+    path('rate/update/<int:pk>', RateUpdateView.as_view(), name='rate_update'),
+    path('rate/detail/<int:pk>', RateDetailsView.as_view(), name='rate_detail'),
+    path('rate/delete/<int:pk>', RateDeleteView.as_view(), name='rate_delete'),
+
+    # ContactUs page's
+    path('contactus', ContactUsListView.as_view(), name='contactus_list'),
+    path('contactus/create', ContactUsCreateView.as_view(), name='contactus_create'),
+    path('contactus/update/<int:pk>', ContactUsUpdateView.as_view(), name='contactus_update'),
+    path('contactus/detail/<int:pk>', ContactUsDetailsView.as_view(), name='contactus_detail'),
+    path('contactus/delete/<int:pk>', ContactUsDeleteView.as_view(), name='contactus_delete'),
 
     # Source page's
     path('source', SourceListView.as_view(), name='source_list'),

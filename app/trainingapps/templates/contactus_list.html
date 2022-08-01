@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block table %}
+    
     <a href="{% url 'main' %}">HOME</a>
-
     <p>ContactUs list</p>
+    <a href="{% url 'contactus_create' %}">Create new data.</a>
+
 
 <table>
     <tr>
@@ -20,6 +22,9 @@
         <td style="background-color: green">{{data.email_to}}</td>
         <td style="background-color: red">{{data.subject}}</td>
         <td style="background-color: blue">{{data.message}}</td>
+        <td style="background-color: white"><a href="{% url 'contactus_detail' data.id %}">View Details</a></td>
+        <td style="background-color: white"><a href="{% url 'contactus_update' data.id %}">Edit</a></td>
+        <td style="background-color: white"><a href="{% url 'contactus_delete' data.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 

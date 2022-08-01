@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block table %}
-    <a href="{% url 'main' %}">HOME</a>
     
+    <a href="{% url 'main' %}">HOME</a>
     <p>Rate list</p>
+    <a href="{% url 'rate_create' %}">Create new data.</a>
 
 <table> 
     <tr>
@@ -20,6 +21,9 @@
         <td style="background-color: green">{{data.base_ccy}}</td>
         <td style="background-color: red">{{data.buy}}</td>
         <td style="background-color: blue">{{data.sell}}</td>
+        <td style="background-color: white"><a href="{% url 'rate_detail' data.id %}">View Details</a></td>
+        <td style="background-color: white"><a href="{% url 'rate_update' data.id %}">Edit</a></td>
+        <td style="background-color: white"><a href="{% url 'rate_delete' data.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 

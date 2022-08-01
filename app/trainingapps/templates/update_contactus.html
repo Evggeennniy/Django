@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Update ContactUs Data</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <a href="{% url 'contactus_list' %}">BACK</a>
+    </form>
+
+{% endblock table %}
