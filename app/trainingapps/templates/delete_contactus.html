@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block table %}
+
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Delete ContactUs Data</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="{% url 'contactus_list' %}">BACK</a>
+    </form>
+
+{% endblock table %} 

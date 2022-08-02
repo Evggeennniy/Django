@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     # 3rd
     'django_extensions',
     'debug_toolbar',
-    'trainingapps'
+    'trainingapps',
+    'rangefilter',
 ]
 
 MIDDLEWARE = [
