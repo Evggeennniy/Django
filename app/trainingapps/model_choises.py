@@ -7,6 +7,7 @@ class CurrencyType(models.TextChoices):
     CURRENCY_TYPE_USD = "USD", "United States Dollar"
     CURRENCY_TYPE_EUR = "EUR", "Euro"
     CURRENCY_TYPE_BTC = "BIT", "Bitcoin"
+# ... = "Meaning what comes", "What the user sees"
 # ^ Create a selection constraint for a field, and connect in models.py ...(choices=self.choices)
 # or this non-class
 # CURRENCY_TYPE_UAH = "UAH"

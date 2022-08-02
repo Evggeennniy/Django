@@ -30,11 +30,11 @@ class RateAdmin(admin.ModelAdmin):  # Creating a model for admin
     # def has_change_permission(self, request, obj=None):
     #     return False
 
-    # list_filter = (
-    #     "id",
-    #     "created"
-    # )  # ^ Default additional django search
-    # or this to advanced search
+    list_filter = (
+        "base_ccy",
+        "ccy",
+    )  # ^ Default additional django filter
+    # or this to advanced filter
     # list_filter = (
     #    ("created", DateTimeRangeFilter),
     # )
@@ -86,6 +86,7 @@ class ContactUsAdmin(admin.ModelAdmin):  # Creating a model for admin
         return False
 
 
-admin.site.register(Rate, RateAdmin)  # Сonnection of the application model with the admin model
+admin.site.register(Rate, RateAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(ContactUs, ContactUsAdmin)
+# ^ Сonnection of the application model with the admin model

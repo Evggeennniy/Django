@@ -10,7 +10,7 @@ class RateForm(forms.ModelForm):
             "base_ccy",
             "buy",
             "sell"
-        )
+        )  # ^ Forms for data manipulation, creation, modification, deletion and so on.
 
 
 class ContactUsForm(forms.ModelForm):
@@ -20,7 +20,7 @@ class ContactUsForm(forms.ModelForm):
             "email_from",
             "email_to",
             "subject",
-            "message"
+            "message",
         )
 
 

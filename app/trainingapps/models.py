@@ -9,9 +9,8 @@ class ContactUs(models.Model):
     email_to = models.EmailField(max_length=30)
     subject = models.CharField(max_length=20)
     message = models.CharField(max_length=120)
-
-    # created = models.DateTimeField(auto_now_add=True)
-    # ^ Djangof-admin-rangefilter
+# ^ A model is a relationship between a class and a database with fields in it.
+# Model fields describe columns of the same name in the table and are properties at the same time
 
 
 class Rate(models.Model):

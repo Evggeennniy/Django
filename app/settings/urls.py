@@ -21,11 +21,11 @@ from django.urls import include, path
 from trainingapps.views import IndexView
 
 urlpatterns = [
-    # Main page
     path('', IndexView.as_view(), name='main'),
-    # Include
+    # ^ Main page
     path('data/', include('trainingapps.urls'), name='main'),
-    # Other
+    # ^ Include app urls
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
+    # ^ Other
 ]
