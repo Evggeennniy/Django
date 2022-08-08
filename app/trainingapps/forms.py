@@ -1,5 +1,5 @@
 from django import forms
-from trainingapps.models import Rate, ContactUs, Source
+from trainingapps.models import Rate, ContactUs, Source, ResponseLog
 
 """
 In Django, we use Django models to design our database tables and their fields.
@@ -22,7 +22,6 @@ class ContactUsForm(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields = (
-            "email_from",
             "email_to",
             "subject",
             "message",
@@ -35,4 +34,16 @@ class SourceForm(forms.ModelForm):
         fields = (
             "source_url",
             "name"
+        )
+
+
+class ResponseLogForm(forms.ModelForm):
+    class Meta:
+        model = ResponseLog
+        fields = (
+            "response_time",
+            "request_method",
+            "query_params",
+            "ip",
+            "path",
         )

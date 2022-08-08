@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
-from trainingapps.models import ContactUs, Rate, Source
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from trainingapps.forms import RateForm, SourceForm, ContactUsForm
-
+from django.core.mail import send_mail
+from trainingapps.models import Rate, ContactUs, Source, ResponseLog
+from django.views.generic import TemplateView, ListView, CreateView, DeleteView, UpdateView
+from trainingapps.forms import RateForm, SourceForm, ContactUsForm, ResponseLogForm
+from django.conf import settings
 
 """
 CRUD WORKING WITH GENERAL
@@ -35,6 +36,14 @@ class SourceListView(ListView):
     success_url = reverse_lazy("source_list")
 
     template_name = "source_list.html"
+
+
+class ResponseLogListView(ListView):
+    queryset = ResponseLog.objects.all()
+    form_class = ResponseLogForm
+    success_url = reverse_lazy("response_list")
+
+    template_name = "response_list.html"
 
 
 """
@@ -82,6 +91,26 @@ class ContactUsCreateView(CreateView):
     success_url = reverse_lazy("contactus_list")
 
     template_name = "create_contactus.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        subject = "Subject Django Project"
+        message = f"""
+        Subject : {self.object.subject}
+        Message : {self.object.message}
+        """
+        email_to = self.object.email_to
+
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [email_to],
+            fail_silently=False,
+        )  # ^ Sending messages
+
+        return response
 
 
 class ContactUsDetailsView(DeleteView):
