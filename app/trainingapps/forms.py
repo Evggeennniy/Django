@@ -22,6 +22,7 @@ class ContactUsForm(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields = (
+            "email_from",
             "email_to",
             "subject",
             "message",

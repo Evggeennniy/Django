@@ -1,5 +1,6 @@
 # do not import from programm
 from django.db import models
+from settings.settings import EMAIL_HOST_USER
 
 
 class CurrencyType(models.TextChoices):
@@ -21,3 +22,7 @@ class CurrencyType(models.TextChoices):
 #     (CURRENCY_TYPE_EUR, "EURO"),
 #     (CURRENCY_TYPE_BTC, "Bitcoin"),
 # )
+
+
+class EmailUse(models.TextChoices):
+    EMAIL1 = EMAIL_HOST_USER, EMAIL_HOST_USER

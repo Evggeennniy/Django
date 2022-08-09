@@ -1,11 +1,11 @@
 from django.db import models
-from trainingapps.model_choises import CurrencyType
+from trainingapps.model_choises import CurrencyType, EmailUse
 
 # Create your models here.
 
 
 class ContactUs(models.Model):
-    email_from = models.EmailField(max_length=30)
+    email_from = models.EmailField(max_length=30, choices=EmailUse.choices, default=EmailUse.EMAIL1)
     email_to = models.EmailField(max_length=30)
     subject = models.CharField(max_length=20)
     message = models.CharField(max_length=120)

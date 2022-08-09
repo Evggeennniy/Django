@@ -1,7 +1,26 @@
-from trainingapps.utils import logging_response, response_without_logging
+from time import time
+from trainingapps.models import ResponseLog
 
 
 class SimpleMiddleware:
+    def addlog_get_response(self, request):
+        timeron = time()
+        response = self.get_response(request)
+        timeroff = time()
+
+        ResponseLog.objects.create(
+            response_time=timeroff - timeron,
+            request_method=request.method,
+            query_params=request.GET,
+            ip=request.META.get("REMOTE_ADDR"),
+            path=request.path
+        )
+        # ^ Saving information about requests
+        # req_info.save()
+        # ^ Do not this! is ResponseLog do it.
+
+        return response
+
     def __init__(self, get_response):
         self.get_response = get_response
         # One-time configuration and initialization.
@@ -11,12 +30,12 @@ class SimpleMiddleware:
         # the view (and later middleware) are called.
 
         if request.path.startswith("/admin/") or request.path.startswith("/__debug__"):
-            response = response_without_logging(self, request)
+            response = self.get_response(request)
 
             return response
 
         else:
-            response = logging_response(self, request)
+            response = self.addlog_get_response(request)
 
             return response
 

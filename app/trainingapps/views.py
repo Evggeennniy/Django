@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DeleteView,
 from trainingapps.forms import RateForm, SourceForm, ContactUsForm, ResponseLogForm
 from django.conf import settings
 
+
 """
 CRUD WORKING WITH GENERAL
 """
