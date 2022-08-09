@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'trainingapps',
     'rangefilter',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'trainingapps.middlewares.SimpleMiddleware'
 ]
+# ^ Actions that are performed before processing the request.
+
 
 ROOT_URLCONF = 'settings.urls'
 
@@ -123,8 +128,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'staticfile/'
+STATIC_ROOT = 'settings/static/'
 
+# ^ Setted Static place
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -134,3 +141,11 @@ if DEBUG:
     import socket  # only if you haven't already imported this
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'eugenepavlov@gmail.com'
+# EMAIL_HOST_PASSWORD = 'qwertyasdfg1234'
+# ^ Work with smtp

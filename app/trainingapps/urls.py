@@ -21,6 +21,7 @@ from trainingapps.views import ContactUsListView, RateListView, SourceListView
 from trainingapps.views import RateCreateView, RateUpdateView, RateDeleteView, RateDetailsView
 from trainingapps.views import SourceCreateView, SourceUpdateView, SourceDeleteView, SourceDetailsView
 from trainingapps.views import ContactUsCreateView, ContactUsUpdateView, ContactUsDeleteView, ContactUsDetailsView
+from trainingapps.views import ResponseLogListView
 
 
 urlpatterns = [
@@ -44,4 +45,8 @@ urlpatterns = [
     path('source/update/<int:pk>', SourceUpdateView.as_view(), name='source_update'),
     path('source/detail/<int:pk>', SourceDetailsView.as_view(), name='source_detail'),
     path('source/delete/<int:pk>', SourceDeleteView.as_view(), name='source_delete'),
+
+    # ResponseLog
+    # ResponseLog
+    path('responselog/table', ResponseLogListView.as_view(), name='response_list')
 ]

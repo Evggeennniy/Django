@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block table %}
+    
+    <a href="{% url 'main' %}">HOME</a>
+    <p>Response list</p>
+
+<table> 
+    <tr>
+        <th style="background-color: yellow">id</th>
+        <th style="background-color: green">Path</th>
+        <th style="background-color: green">Request method</th>
+        <th style="background-color: red">Query params</th>
+        <th style="background-color: blue">Ip</th>
+        <th style="background-color: whitesmoke">Response time</th>
+    </tr>
+    {% for data in object_list %}
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.path}}</td>
+        <td style="background-color: green">{{data.request_method}}</td>
+        <td style="background-color: red">{{data.query_params}}</td>
+        <td style="background-color: blue">{{data.ip}}</td>
+        <td style="background-color: whitesmoke">{{data.response_time}}</td>
+    </tr>
+    {% endfor %}
+
+{% endblock table %}
