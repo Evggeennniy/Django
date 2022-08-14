@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Homework Project</title>
-  </head>
-  <body>
+{% extends "base.html" %}
 
-    <div>Project dataGL @Eugene.<a href="admin/">I am Admin.</a></div>
-
+{% block table %}
     <div>
       Currency-value table: <a href="{% url 'rate_list' %}">Click her</a>
     </div>
@@ -22,5 +15,4 @@
     </div>
     <div>
 
-  </body>
-</html>
+{% endblock table %}
