@@ -21,7 +21,7 @@ from trainingapps.views import ContactUsListView, RateListView, SourceListView
 from trainingapps.views import RateCreateView, RateUpdateView, RateDeleteView, RateDetailsView
 from trainingapps.views import SourceCreateView, SourceUpdateView, SourceDeleteView, SourceDetailsView
 from trainingapps.views import ContactUsCreateView, ContactUsUpdateView, ContactUsDeleteView, ContactUsDetailsView
-from trainingapps.views import ResponseLogListView, UserUpdateView
+from trainingapps.views import ResponseLogListView
 
 
 urlpatterns = [
@@ -49,6 +49,4 @@ urlpatterns = [
     # ResponseLog
     path('responselog/table', ResponseLogListView.as_view(), name='response_list'),
 
-    # User's
-    path('user/profile/', UserUpdateView.as_view(), name='user_profile')
 ]
