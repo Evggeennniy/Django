@@ -16,11 +16,12 @@ Including another URLconf
 # Default import
 from django.contrib import admin
 from django.urls import include, path
-
 # Main
 from trainingapps.views import IndexView
 
 urlpatterns = [
+    path('auth/', include('django.contrib.auth.urls')),
+    # ^ Django auth
     path('', IndexView.as_view(), name='main'),
     # ^ Main page
     path('data/', include('trainingapps.urls'), name='main'),

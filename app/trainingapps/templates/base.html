@@ -9,16 +9,18 @@
   <div>Project dataGL @Eugene.<a href="admin/"> I am Admin. </a></div>
   
   {% if request.user.is_authenticated %}
+    <div>{{request.user.email}} <a href="{% url 'user_profile' %}"> My Profile </a></div>
     <div><a href="{% url 'logout' %}"> Logout </a></div>
-  
+
+
   {% elif not request.user.is_authenticated %}
     <div><a href="{% url 'login' %}"> Login </a></div>
-  
+
   {% endif %}
-  
+
   {% block table %}
   {% endblock table %}
-  
+
   <div><a href="{% url 'main' %}"> HOME </a></div>
 
 </body>
