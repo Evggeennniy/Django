@@ -8,10 +8,17 @@ class SimpleMiddleware:
         response = self.get_response(request)
         timeroff = time()
 
+        params = None
+
+        if request.method == "GET":
+            params = request.GET
+        elif request.method == "POST":
+            params = request.POST
+
         ResponseLog.objects.create(
             response_time=timeroff - timeron,
             request_method=request.method,
-            query_params=request.GET,
+            query_params=params,
             ip=request.META.get("REMOTE_ADDR"),
             path=request.path
         )
