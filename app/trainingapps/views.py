@@ -23,12 +23,7 @@ class OnlySuperUser(UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        if self.test_func():
-            pass
-        else:
-            return super().handle_no_permission()
+    # ^ if tests be false, return perm. denided
 
 
 """
