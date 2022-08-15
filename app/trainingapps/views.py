@@ -11,6 +11,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # access to the capabilities of the class to which the module was connected
 # will depend on the presence of the user's sessionid key
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import UserPassesTestMixin
+# ^ Users pass
+"""
+USERS PASS
+"""
+
+
+class OnlySuperUser(UserPassesTestMixin):
+    permission_denied_message = 'Trying to bypass the system !'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        if self.test_func():
+            pass
+        else:
+            return super().handle_no_permission()
 
 
 """
@@ -73,7 +91,7 @@ class RateDetailsView(DeleteView):
     template_name = "detail_rate.html"
 
 
-class RateUpdateView(UpdateView):
+class RateUpdateView(OnlySuperUser, UpdateView):
     queryset = Rate.objects.all()
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
@@ -81,7 +99,7 @@ class RateUpdateView(UpdateView):
     template_name = "update_rate.html"
 
 
-class RateDeleteView(DeleteView):
+class RateDeleteView(OnlySuperUser, DeleteView):
     queryset = Rate.objects.all()
     success_url = reverse_lazy("rate_list")
 

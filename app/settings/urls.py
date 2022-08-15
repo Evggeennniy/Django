@@ -29,10 +29,10 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     # ^ User's
     path('user/profile/', UserUpdateView.as_view(), name='user_profile'),
-    # ^ Other
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/4321432143/',
         auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # ^ Other
 ]

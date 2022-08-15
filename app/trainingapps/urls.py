@@ -48,5 +48,4 @@ urlpatterns = [
 
     # ResponseLog
     path('responselog/table', ResponseLogListView.as_view(), name='response_list'),
-
 ]
