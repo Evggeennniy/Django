@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from trainingapps.views import IndexView, UserUpdateView
+from trainingapps.views import IndexView
 
 urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
@@ -24,13 +24,11 @@ urlpatterns = [
     path('', IndexView.as_view(), name='main'),
     # ^ Main page
 
-    path('data/', include('trainingapps.urls'), name='main'),
+    path('data/', include('trainingapps.urls')),
+    path('accounts/', include('accounts.urls')),
     # ^ Include app urls
 
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     # ^ User's
-
-    path('user/profile/', UserUpdateView.as_view(), name='user_profile'),
-    # ^ Password
 ]

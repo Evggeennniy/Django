@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'trainingapps',
+    'accounts',
     'rangefilter',
     'import_export',
 ]
@@ -157,3 +158,11 @@ LOGIN_REDIRECT_URL = reverse_lazy('main')
 LOGOUT_REDIRECT_URL = reverse_lazy('main')
 LOGIN_URL = reverse_lazy('login')
 # ^ Reassign path for these cases.
+
+AUTH_USER_MODEL = 'accounts.User'
+# ^ Change Users basedata
+
+HTTP_SHEM = 'http'
+# ^ Protocol
+
+DOMAIN = 'localhost:8000'

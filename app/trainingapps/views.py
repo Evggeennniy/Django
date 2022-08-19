@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # ^ The module connects to classes,
 # access to the capabilities of the class to which the module was connected
 # will depend on the presence of the user's sessionid key
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
 # ^ Users pass
 """
@@ -194,31 +193,3 @@ class SourceDeleteView(DeleteView):
     success_url = reverse_lazy("source_list")
 
     template_name = "delete_source.html"
-
-
-"""
-WORKING WITH SOURCE
-"""
-
-
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-    queryset = get_user_model().objects.all()
-    success_url = reverse_lazy("main")
-
-    template_name = "my_profile.html"
-
-    fields = (
-        "first_name",
-        "last_name",
-    )  # ^ Creating fields in the model if the creation of the form is not required
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     queryset = queryset.filter(id=self.request.user.id)
-
-    #     return queryset
-    # ^ Return isolated query
-
-    def get_object(self, queryset=None):
-        return self.request.user
-    # ^ Return only needed query
