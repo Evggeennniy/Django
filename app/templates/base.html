@@ -15,6 +15,7 @@
 
   {% elif not request.user.is_authenticated %}
     <div><a href="{% url 'login' %}"> Login </a></div>
+    <div><a href="{% url 'signup' %}"> SignUps </a></div>
 
   {% endif %}
 
