@@ -62,7 +62,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
 class AccountConfirmView(TemplateView):
     extra_context = {
-        "information": "Registration finished, account.",
+        "information": "Registration finished, account activated.",
     }
 
     template_name = "info.html"

@@ -35,7 +35,7 @@ class IndexView(TemplateView):
 
 
 class RateListView(LoginRequiredMixin, ListView):
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related("source")
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
 
