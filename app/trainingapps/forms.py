@@ -28,6 +28,10 @@ class ContactUsForm(forms.ModelForm):
             "message",
         )
 
+        widgets = {
+            "message": forms.Textarea()
+        }  # ^ Reassign field widgets via forms, best practice.
+
 
 class SourceForm(forms.ModelForm):
     class Meta:

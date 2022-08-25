@@ -2,13 +2,12 @@
 
 {% block table %}
 
-    <p>Update Rate Data</p>
+    <p>Sing Up</p>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
-        <a href="{% url 'rate_list' %}">BACK</a>
+        <button type="submit">Send</button>
     </form>
 
 {% endblock table %}

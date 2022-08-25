@@ -1,0 +1,56 @@
+from uuid import uuid4
+from django import forms
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+from settings.settings import EMAIL_HOST_USER, HTTP_SHEM, DOMAIN
+from accounts.models import User
+from django.core.mail import send_mail
+
+
+class SignUpForm(forms.ModelForm):
+    password = forms.CharField(min_length=6)
+    confirm_password = forms.CharField(min_length=6)
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'email',
+            'password',
+            'confirm_password',
+        )
+
+    def clean(self):  # 1.Method validation
+        cleaned_data = super().clean()
+        if not self.errors:
+            if cleaned_data['password'] != cleaned_data['confirm_password']:
+                raise forms.ValidationError('Passwords missmatch!')
+
+        return cleaned_data
+
+    def save(self, commit=True):  # 2.Method save
+        instance: User = super().save(commit=False)
+        instance.username = str(uuid4())
+        instance.is_active = False
+        # ^ if is_active == False, account denied login
+        instance.set_password(self.cleaned_data['password'])
+        # ^ Hashing password
+
+        if commit:
+            instance.save()
+        self._send_activation_email()
+
+        return instance
+
+    def _send_activation_email(self):  # 3.Method send email
+        subject = 'Activate your account'
+        message = f"""
+        Activation link: {HTTP_SHEM}://{DOMAIN}{reverse('user_activate', args=(self.instance.username, ))}
+        """  # ^ args=(self.instance.username, ) !
+
+        send_mail(
+            subject,
+            message,
+            EMAIL_HOST_USER,
+            [self.instance.email],
+            fail_silently=False,
+        )

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
+
 {% block table %}
     
-    <a href="{% url 'main' %}">HOME</a>
     <p>Rate list</p>
     <a href="{% url 'rate_create' %}">Create new data.</a>
 
@@ -14,6 +14,8 @@
         <th style="background-color: red">Buy</th>
         <th style="background-color: blue">Sell</th>
     </tr>
+    
+{% if request.user.is_superuser %}
     {% for data in object_list %}
     <tr>
         <td style="background-color: yellow">{{data.id}}</td>
@@ -26,5 +28,16 @@
         <td style="background-color: white"><a href="{% url 'rate_delete' data.id %}">Delete</a></td>
     </tr>
     {% endfor %}
+{% else %}
+    {% for data in object_list %}
+    <tr>
+        <td style="background-color: yellow">{{data.id}}</td>
+        <td style="background-color: green">{{data.ccy}}</td>
+        <td style="background-color: green">{{data.base_ccy}}</td>
+        <td style="background-color: red">{{data.buy}}</td>
+        <td style="background-color: blue">{{data.sell}}</td>
+    </tr>
+    {% endfor %}
+{% endif %}
 
 {% endblock table %}

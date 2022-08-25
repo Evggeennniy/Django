@@ -25,21 +25,21 @@ from trainingapps.views import ResponseLogListView
 
 
 urlpatterns = [
-    # Rate page's
+    # Rate
     path('rate', RateListView.as_view(), name='rate_list'),
     path('rate/create', RateCreateView.as_view(), name='rate_create'),
     path('rate/update/<int:pk>', RateUpdateView.as_view(), name='rate_update'),
     path('rate/detail/<int:pk>', RateDetailsView.as_view(), name='rate_detail'),
     path('rate/delete/<int:pk>', RateDeleteView.as_view(), name='rate_delete'),
 
-    # ContactUs page's
+    # ContactUs
     path('contactus', ContactUsListView.as_view(), name='contactus_list'),
     path('contactus/create', ContactUsCreateView.as_view(), name='contactus_create'),
     path('contactus/update/<int:pk>', ContactUsUpdateView.as_view(), name='contactus_update'),
     path('contactus/detail/<int:pk>', ContactUsDetailsView.as_view(), name='contactus_detail'),
     path('contactus/delete/<int:pk>', ContactUsDeleteView.as_view(), name='contactus_delete'),
 
-    # Source page's
+    # Source
     path('source', SourceListView.as_view(), name='source_list'),
     path('source/create', SourceCreateView.as_view(), name='source_create'),
     path('source/update/<int:pk>', SourceUpdateView.as_view(), name='source_update'),
@@ -47,6 +47,5 @@ urlpatterns = [
     path('source/delete/<int:pk>', SourceDeleteView.as_view(), name='source_delete'),
 
     # ResponseLog
-    # ResponseLog
-    path('responselog/table', ResponseLogListView.as_view(), name='response_list')
+    path('responselog/table', ResponseLogListView.as_view(), name='response_list'),
 ]

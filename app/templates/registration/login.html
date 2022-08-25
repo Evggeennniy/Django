@@ -2,13 +2,12 @@
 
 {% block table %}
 
-    <p>Create ContactUs Data</p>
+    <p>Log In Account</p>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
-        <a href="{% url 'contactus_list' %}">BACK</a>
+        <button type="submit">Send</button>
     </form>
-
+    <a href="{% url 'password_reset' %}">Forgot a password</a>
 {% endblock table %} 
