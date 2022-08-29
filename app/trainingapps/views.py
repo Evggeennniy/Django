@@ -36,6 +36,7 @@ class IndexView(TemplateView):
 
 class RateListView(LoginRequiredMixin, ListView):
     queryset = Rate.objects.all().select_related("source")
+    # ^ .select_related() = JOIN table
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
 
@@ -122,6 +123,12 @@ class ContactUsCreateView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
+        self.send_mail()
+        # ^ if form is valid use a next do
+
+        return response
+
+    def send_mail(self):
         subject = "Subject Django Project"
         message = f"""
         Subject : {self.object.subject}
@@ -136,8 +143,6 @@ class ContactUsCreateView(CreateView):
             [email_to],
             fail_silently=False,
         )  # ^ Sending messages
-
-        return response
 
 
 class ContactUsDetailsView(DeleteView):
