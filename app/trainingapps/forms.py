@@ -15,6 +15,7 @@ class RateForm(forms.ModelForm):
             "base_ccy",
             "buy",
             "sell",
+            "source"
         )  # ^ Forms for data manipulation, creation, modification, deletion and so on.
 
 

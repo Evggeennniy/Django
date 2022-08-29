@@ -18,6 +18,7 @@ class SignUpForm(forms.ModelForm):
             'password',
             'confirm_password',
         )
+        # ^ Reassign field widgets via forms, best practice.
 
     def clean(self):  # 1.Method validation
         cleaned_data = super().clean()

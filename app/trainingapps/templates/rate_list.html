@@ -13,6 +13,7 @@
         <th style="background-color: green">Base_ccy</th>
         <th style="background-color: red">Buy</th>
         <th style="background-color: blue">Sell</th>
+        <th style="background-color: purple">Source</th>
     </tr>
     
 {% if request.user.is_superuser %}
@@ -23,6 +24,7 @@
         <td style="background-color: green">{{data.base_ccy}}</td>
         <td style="background-color: red">{{data.buy}}</td>
         <td style="background-color: blue">{{data.sell}}</td>
+        <td style="background-color: purple">{{data.source.name}}</td>
         <td style="background-color: white"><a href="{% url 'rate_detail' data.id %}">View Details</a></td>
         <td style="background-color: white"><a href="{% url 'rate_update' data.id %}">Edit</a></td>
         <td style="background-color: white"><a href="{% url 'rate_delete' data.id %}">Delete</a></td>
@@ -36,6 +38,7 @@
         <td style="background-color: green">{{data.base_ccy}}</td>
         <td style="background-color: red">{{data.buy}}</td>
         <td style="background-color: blue">{{data.sell}}</td>
+        <td style="background-color: purple">{{data.source.name}}</td>
     </tr>
     {% endfor %}
 {% endif %}
