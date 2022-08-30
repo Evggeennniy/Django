@@ -3,6 +3,7 @@ django_extensions==3.2.*
 django-admin-rangefilter==0.8.*
 django-import-export==2.8.*
 ipython==8.4.*
+Celery==5.2.*
 
 #dev
 django-debug-toolbar==3.5.*

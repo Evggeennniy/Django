@@ -1,6 +1,5 @@
 from django.urls import reverse_lazy
-from django.core.mail import send_mail
-from django.conf import settings
+from trainingapps.tasks import sending_mail
 # ^ Dependencies
 from trainingapps.models import Rate, ContactUs, Source, ResponseLog
 from django.views.generic import TemplateView, ListView, CreateView, DeleteView, UpdateView
@@ -123,26 +122,10 @@ class ContactUsCreateView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        self.send_mail()
+        sending_mail.delay(self.object.subject, self.object.email_from, self.object.email_to)
         # ^ if form is valid use a next do
 
         return response
-
-    def send_mail(self):
-        subject = "Subject Django Project"
-        message = f"""
-        Subject : {self.object.subject}
-        Message : {self.object.message}
-        """
-        email_to = self.object.email_to
-
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [email_to],
-            fail_silently=False,
-        )  # ^ Sending messages
 
 
 class ContactUsDetailsView(DeleteView):

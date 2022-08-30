@@ -166,3 +166,7 @@ HTTP_SHEM = 'http'
 # ^ Protocol
 
 DOMAIN = 'localhost:8000'
+# ^ Setted domain name
+
+CELERY_BROKER_URL = 'amqp://localhost'
+# ^ Setted broker url
