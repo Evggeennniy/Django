@@ -12,21 +12,40 @@ def to_decimal(value: str, precision: int = 2) -> Decimal:
     return round(Decimal(value), precision)
 
 
-def get_json_from_url(url: str):
+def get_json_from_url(url: str) -> dict:
     response = requests.get(url)
     response.raise_for_status()
 
     return response.json()
 
 
-def get_txt_from_url(url):
+def get_txt_from_url(url: str) -> str:
     response = requests.get(url)
     txt = response.text
 
     return txt
 
 
-def eazyhandler(data: list, cutleft: int = None, cutright: int = None, iftype: type = str, max_len: int = None):
+def is_number(s: str) -> bool:
+    """
+    Returns True is string is a int or float.
+    """
+    if s.isdigit():
+        return True
+    elif s.replace('.', '').isdigit():
+        return True
+    else:
+        return False
+
+
+def eazyhandler(
+    data: list,
+    cutleft: int = None,
+    cutright: int = None,
+    onlynumber: bool = False,
+    max_len: int = None,
+) -> list:
+
     """
     Lightweight handler with cropping and sorting options.
     """
@@ -35,11 +54,12 @@ def eazyhandler(data: list, cutleft: int = None, cutright: int = None, iftype: t
     for element in data:
         element = element.text
 
-        try:
-            if iftype(element):
-                ready_data += [element[cutleft:cutright]]
-        except ValueError:
-            pass
+        if not onlynumber:
+            ready_data += [element[cutleft:cutright]]
+        if onlynumber:
+            element = element[cutleft:cutright]
+            if is_number(element):
+                ready_data += [element]
 
     ready_data = ready_data[:max_len]
 

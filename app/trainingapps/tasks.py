@@ -62,16 +62,14 @@ def parse_privatbank():
     # ^ Search to name or create to default args
 
     for rate_data in url_data:
-        ccy = rate_data['ccy']
-        base_ccy = rate_data['base_ccy']
+        ccy = str(rate_data['ccy'])
+        base_ccy = str(rate_data['base_ccy'])
 
         # if ccy not in permitted_objects or base_ccy not in permitted_objects:
         #     continue
         # ^ We indicate that if ccy or base_ccy does not match the supported fields, we do not accept it
 
-        if str(ccy) in permitted_objects and str(base_ccy) in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects or base_ccy not in permitted_objects:
             continue
 
         buy = utils.to_decimal(rate_data['buy'])
@@ -97,8 +95,6 @@ def parse_privatbank():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
 
 
 @shared_task
@@ -123,9 +119,7 @@ def parse_monobank():
         ccy = str(rate_data['currencyCodeA'])
         base_ccy = str(rate_data['currencyCodeB'])
 
-        if ccy in permitted_objects and base_ccy in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects or base_ccy not in permitted_objects:
             continue
 
         ccy = permitted_objects[ccy]
@@ -150,8 +144,6 @@ def parse_monobank():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
 
 
 @shared_task
@@ -175,9 +167,7 @@ def parse_vkurseua():
     for rate_data in url_data:
         ccy = rate_data
 
-        if ccy in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects:
             continue
 
         ccy = permitted_objects[ccy]
@@ -202,8 +192,6 @@ def parse_vkurseua():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
 
 
 @shared_task
@@ -223,7 +211,7 @@ def parse_ukrainekurs():
     # ^ Select the necessary data
 
     ready_names_data = utils.eazyhandler(data=raw_names_data, max_len=2)
-    ready_values_data = utils.eazyhandler(data=raw_values_data, cutright=5, max_len=8)
+    ready_values_data = utils.eazyhandler(data=raw_values_data, cutright=5, onlynumber=True, max_len=8)
     # ^ Data processing
 
     url_data = utils.picker_datas_onetofour(ready_names_data, ready_values_data)
@@ -242,9 +230,7 @@ def parse_ukrainekurs():
     for rate_data in url_data:
         ccy = rate_data['ccy']
 
-        if ccy in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects:
             continue
 
         ccy = permitted_objects[ccy]
@@ -269,8 +255,6 @@ def parse_ukrainekurs():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
 
 
 @shared_task
@@ -287,7 +271,7 @@ def parse_financeua():
     raw_values_data = raw_table_data.find_all('span', class_='value -decrease')
 
     ready_names_data = utils.eazyhandler(data=raw_names_data, max_len=2)
-    ready_values_data = utils.eazyhandler(data=raw_values_data, cutright=5, max_len=4)
+    ready_values_data = utils.eazyhandler(data=raw_values_data, cutright=5, onlynumber=True, max_len=4)
 
     url_data = utils.picker_datas_onetotwo(ready_names_data, ready_values_data)
 
@@ -304,9 +288,7 @@ def parse_financeua():
     for rate_data in url_data:
         ccy = rate_data['ccy']
 
-        if ccy in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects:
             continue
 
         ccy = permitted_objects[ccy]
@@ -331,8 +313,6 @@ def parse_financeua():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
 
 
 @shared_task
@@ -349,7 +329,7 @@ def parse_bankcreditdnepr():
     raw_values_data = raw_table_data.find_all('td', style='text-align: center')
 
     ready_names_data = utils.eazyhandler(data=raw_names_data, cutright=3, max_len=4)
-    ready_values_data = utils.eazyhandler(data=raw_values_data, iftype=float, max_len=8)
+    ready_values_data = utils.eazyhandler(data=raw_values_data, onlynumber=True, max_len=8)
 
     url_data = utils.picker_datas_onetotwo(ready_names_data, ready_values_data)
 
@@ -366,9 +346,7 @@ def parse_bankcreditdnepr():
     for rate_data in url_data:
         ccy = rate_data['ccy']
 
-        if ccy in permitted_objects:
-            pass
-        else:
+        if ccy not in permitted_objects:
             continue
 
         ccy = permitted_objects[ccy]
@@ -393,5 +371,3 @@ def parse_bankcreditdnepr():
                 sell=sell,
                 source=source,
             )
-        else:
-            pass
