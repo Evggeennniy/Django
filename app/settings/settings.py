@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from django.urls import reverse_lazy
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -166,3 +167,39 @@ HTTP_SHEM = 'http'
 # ^ Protocol
 
 DOMAIN = 'localhost:8000'
+# ^ Setted domain name
+
+CELERY_BROKER_URL = 'amqp://localhost'
+# ^ Setted broker url
+
+CELERY_BEAT_SCHEDULE = {
+    'parse_privatbank': {
+        'task': 'trainingapps.tasks.parse_privatbank',
+        'schedule': crontab(minute='*/2'),
+    },
+
+    'parse_monobank': {
+        'task': 'trainingapps.tasks.parse_monobank',
+        'schedule': crontab(minute='*/2'),
+    },
+
+    'parse_vkurseua': {
+        'task': 'trainingapps.tasks.parse_vkurseua',
+        'schedule': crontab(minute='*/2'),
+    },
+
+    'parse_ukrainekurs': {
+        'task': 'trainingapps.tasks.parse_ukrainekurs',
+        'schedule': crontab(minute='*/2'),
+    },
+
+    'parse_financeua': {
+        'task': 'trainingapps.tasks.parse_financeua',
+        'schedule': crontab(minute='*/2'),
+    },
+
+    'parse_bankcreditdnepr': {
+        'task': 'trainingapps.tasks.parse_bankcreditdnepr',
+        'schedule': crontab(minute='*/2'),
+    },
+}  # ^ 'keyname': {'task': 'path to func', 'schedule': crontab(set time to do func)}
