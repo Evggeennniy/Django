@@ -1,10 +1,8 @@
 from uuid import uuid4
 from django import forms
 from django.contrib.auth import get_user_model
-from django.urls import reverse
-from settings.settings import EMAIL_HOST_USER, HTTP_SHEM, DOMAIN
 from accounts.models import User
-from django.core.mail import send_mail
+from trainingapps.tasks import send_activation_email
 
 
 class SignUpForm(forms.ModelForm):
@@ -38,20 +36,6 @@ class SignUpForm(forms.ModelForm):
 
         if commit:
             instance.save()
-        self._send_activation_email()
+        send_activation_email.delay(username=self.instance.username, email_to=self.instance.email)
 
         return instance
-
-    def _send_activation_email(self):  # 3.Method send email
-        subject = 'Activate your account'
-        message = f"""
-        Activation link: {HTTP_SHEM}://{DOMAIN}{reverse('user_activate', args=(self.instance.username, ))}
-        """  # ^ args=(self.instance.username, ) !
-
-        send_mail(
-            subject,
-            message,
-            EMAIL_HOST_USER,
-            [self.instance.email],
-            fail_silently=False,
-        )

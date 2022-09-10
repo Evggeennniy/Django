@@ -1,10 +1,28 @@
 from celery import shared_task
 from django.core.mail import send_mail
+from django.urls import reverse
+from settings.settings import EMAIL_HOST_USER, HTTP_SHEM, DOMAIN
 
 from trainingapps import utils
 from trainingapps import model_choises as mch
 
 from bs4 import BeautifulSoup
+
+
+@shared_task
+def send_activation_email(username, email_to):  # 3.Method send email
+    subject = 'Activate your account'
+    message = f"""
+    Activation link: {HTTP_SHEM}://{DOMAIN}{reverse('user_activate', args=(username, ))}
+    """  # ^ args=(self.instance.username, ) !
+
+    send_mail(
+        subject,
+        message,
+        EMAIL_HOST_USER,
+        [email_to],
+        fail_silently=False,
+    )
 
 
 @shared_task
