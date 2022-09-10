@@ -17,7 +17,6 @@
                 <th>SUBJECT</th>
                 <th>MESSAGE</th>
                 <th>OPTIONS</th>
-                <th>SUPERUSER OPTIONS</th>
             </tr>
         </thead>
 
@@ -29,6 +28,7 @@
                 <th>{{data.email_to}}</th>
                 <th>{{data.subject}}</th>
                 <th>{{data.message}}</th>
+                <th><button type="button" class="btn btn-info"><a href="{% url 'contactus_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
             </tr>
         {% endfor %}
     
