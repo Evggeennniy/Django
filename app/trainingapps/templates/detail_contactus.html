@@ -2,11 +2,21 @@
 
 {% block table %}
 
-    <p>Details ContactUs Data</p>
-    
-    <div>ID: {{ object.id }}</div>
-    <div>Message: {{ object.message }}</div>
-    <div>Email to : {{ object.email_to }}</div>
-    <a href="{% url 'contactus_list' %}">BACK</a>
+<form class="container w-50">
+    <br>
+    <br>
+    <h2>ContactUs Details</h2>
+    <br>
+    <label for="id">ID:</label>
+    <input id="id" type="text" class="form-control" placeholder="{{ object.id }}" disabled>
+    <br>
+    <label for="email_from">Email from:</label>
+    <input id="email_from" type="text" class="form-control" placeholder="{{ object.email_from }}" disabled>
+    <br>
+    <label for="message">Message:</label>
+    <textarea id="message" class="form-control" rows="5" name="text" placeholder="{{ object.message }}" disabled></textarea>
+    <br>
+    <button type="button" class="btn btn-info"><a href="{% url 'contactus_list' %}" class="nav-link px-2 text-black">BACK</a></button>
+</form>
 
 {% endblock table %}

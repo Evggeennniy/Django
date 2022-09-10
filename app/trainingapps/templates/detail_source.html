@@ -2,11 +2,21 @@
 
 {% block table %}
 
-    <p>Details Source Data</p>
+    <form class="container w-50">
+        <br>
+        <br>
+        <h2>Source Details</h2>
+        <br>
+        <label for="id">ID:</label>
+        <input id="id" type="text" class="form-control" placeholder="{{ object.id }}" disabled>
+        <br>
+        <label for="name">Name:</label>
+        <input id="name" type="text" class="form-control" placeholder="{{ object.name }}" disabled>
+        <br>
+        <label for="source_url">Source Url:</label>
+        <textarea id="source_url" class="form-control" rows="5" name="text" placeholder="{{ object.source_url }}" disabled></textarea>
+        <br>
+        <button type="button" class="btn btn-info"><a href="{% url 'source_list' %}" class="nav-link px-2 text-black">BACK</a></button>
+    </form>
     
-    <div>ID: {{ object.id }}</div>
-    <div>Name: {{ object.name }}</div>
-    <div>Source url: {{ object.source_url }}</div>
-    <a href="{% url 'source_list' %}">BACK</a>
-
 {% endblock table %}

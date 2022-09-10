@@ -2,25 +2,48 @@
 
 {% block table %}
 
-    <p>Source list</p>
-    <a href="{% url 'source_create' %}">Create new data.</a>
+<div class="container mt-3">
+    <h2>Sources Information</h2>
+    <div class="d-grid">
+        <button type="button" class="btn btn-primary btn-block"><a href="{% url 'source_create' %}" class="nav-link px-2 text-black">Create Source</a></button>
+      </div>
+      <br>
+    <table class="table table-white table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>SOURCE NAME</th>
+                <th>SOURCE URL</th>
+                <th>OPTIONS</th>
+                <th>SUPERUSER OPTIONS</th>
+            </tr>
+        </thead>
 
+    {% if not request.user.is_superuser %}
+        {% for data in object_list %}
+            <tr>
+                <th>{{data.id}}</th>
+                <th>{{data.name}}</th>
+                <th>{{data.source_url}}</th>
+                <th><button type="button" class="btn btn-info"><a href="{% url 'source_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
+            </tr>
+        {% endfor %}
+    
+    {% elif request.user.is_superuser %}
+        {% for data in object_list %}
+            <tr>
+                <th>{{data.id}}</th>
+                <th>{{data.name}}</th>
+                <th>{{data.source_url}}</th>
+                <th><button type="button" class="btn btn-info"><a href="{% url 'source_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
+                <th><button type="button" class="btn btn-warning"><a href="{% url 'source_update' data.id %}" class="nav-link px-2 text-black">Edit</a></button>
+                <button type="button" class="btn btn-danger"><a href="{% url 'source_delete' data.id %}" class="nav-link px-2 text-black">Delete</a></button></th>
 
-<table> 
-    <tr>
-        <th style="background-color: yellow">id</th>
-        <th style="background-color: green">Name</th>
-        <th style="background-color: green">Source URL</th>
-    </tr>
-    {% for data in object_list %}
-    <tr>
-        <td style="background-color: yellow">{{ data.id }}</td>
-        <td style="background-color: green">{{ data.name }}</td>
-        <td style="background-color: green">{{ data.source_url }}</td>
-        <td style="background-color: white"><a href="{% url 'source_detail' data.id %}">View Details</a></td>
-        <td style="background-color: white"><a href="{% url 'source_update' data.id %}">Edit</a></td>
-        <td style="background-color: white"><a href="{% url 'source_delete' data.id %}">Delete</a></td>
-    </tr>
-    {% endfor %}
+            </tr>
+        {% endfor %}
+    {% endif %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock table %}

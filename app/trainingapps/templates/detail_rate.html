@@ -2,11 +2,21 @@
 
 {% block table %}
 
-    <p>Details Rate Data</p>
-    
-    <div>ID: {{ object.id }}</div>
-    <div>Ccy: {{ object.ccy }}</div>
-    <div>Base_ccy : {{ object.base_ccy }}</div>
-    <a href="{% url 'rate_list' %}">BACK</a>
+<form class="container w-50">
+    <br>
+    <br>
+    <h2>Rate Details</h2>
+    <br>
+    <label for="id">ID:</label>
+    <input id="id" type="text" class="form-control" placeholder="{{ object.id }}" disabled>
+    <br>
+    <label for="ccy">Currency Type:</label>
+    <input id="ccy" type="text" class="form-control" placeholder="{{ object.ccy }}" disabled>
+    <br>
+    <label for="bccy">Base Currency Type:</label>
+    <input id="bssy" type="text" class="form-control" placeholder="{{ object.base_ccy }}" disabled>
+    <br>
+    <button type="button" class="btn btn-info"><a href="{% url 'rate_list' %}" class="nav-link px-2 text-black">BACK</a></button>
+</form>
 
 {% endblock table %}
