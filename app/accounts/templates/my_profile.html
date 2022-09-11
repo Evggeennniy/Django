@@ -3,8 +3,11 @@
 {% block table %}
 
     <p> My Profile </p>
+    {% if request.user.avatar %}
+        <img src="{{ request.user.avatar.url }}" width="100" height="100">   
+    {% endif %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>

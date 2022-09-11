@@ -44,6 +44,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "my_profile.html"
 
     fields = (
+        "avatar",
         "first_name",
         "last_name",
     )  # ^ Creating fields in the model if the creation of the form is not required

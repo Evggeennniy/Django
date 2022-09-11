@@ -16,24 +16,16 @@
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
           <h2>DjangoPractice</h2>
         </a>
-      {% if not request.user.is_superuser %}
         <ul class="container nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
           <li><a href="{% url 'rate_list' %}" class="nav-link px-2 text-white">Statistics</a></li>
           <li><a href="{% url 'source_list' %}" class="nav-link px-2 text-white">Sources</a></li>
           <!-- <li><a href="" class="nav-link px-2 text-white">Pricing</a></li> -->
           <li><a href="{% url 'contactus_list' %}" class="nav-link px-2 text-white">Support</a></li>
-        </ul>
-      {% elif request.user.is_superuser %}
-        <ul class="container nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-          <li><a href="{% url 'rate_list' %}" class="nav-link px-2 text-white">Statistics</a></li>
-          <li><a href="{% url 'source_list' %}" class="nav-link px-2 text-white">Sources</a></li>
-          <!-- <li><a href="" class="nav-link px-2 text-white">Pricing</a></li> -->
-          <li><a href="{% url 'contactus_list' %}" class="nav-link px-2 text-white">Support</a></li>
+      {% if request.user.is_superuser %}
           <li><a href="{% url 'response_list' %}" class="nav-link px-2 text-white">Logs</a></button>
-        </ul>
       {% endif %}
+        </ul>
 
       {% if request.user.is_authenticated %}
         <div class="text-end">
