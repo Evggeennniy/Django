@@ -5,6 +5,9 @@ django-import-export==2.8.*
 ipython==8.4.*
 Celery==5.2.*
 
+#front
+crispy-bootstrap5==0.6
+
 #dev
 django-debug-toolbar==3.5.*
 

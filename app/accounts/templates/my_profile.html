@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block table %}
-
-    <p> My Profile </p>
-    {% if request.user.avatar %}
-        <img src="{{ request.user.avatar.url }}" width="100" height="100">   
-    {% endif %}
-
-    <form method="post" enctype="multipart/form-data">
+    <br>
+    <form method="post" enctype="multipart/form-data" class="container w-50 form-control">
+        <h2>My Profile</h2>
+        {% if request.user.avatar %}
+            <img src="{{ request.user.avatar.url }}" width="100" height="100">   
+        {% endif %}
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-        <a href="{% url 'password_change' %}">Change password</a>
+        <!-- {{ form.as_p }} -->
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-success">SAVE</button>
+        <button type="button" class="btn btn-warning"><a href="{% url 'password_change' %}" class="nav-link px-2">Change password</a></button>
     </form>
 
 {% endblock table %}

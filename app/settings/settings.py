@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'accounts',
     'rangefilter',
     'import_export',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -211,3 +213,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/2'),
     },
 }  # ^ 'keyname': {'task': 'path to func', 'schedule': crontab(set time to do func)}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
