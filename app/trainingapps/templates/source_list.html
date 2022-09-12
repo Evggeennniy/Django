@@ -14,16 +14,18 @@
                 <th>ID</th>
                 <th>SOURCE NAME</th>
                 <th>SOURCE URL</th>
+                <th>LOGO</th>
                 <th>OPTIONS</th>
             </tr>
         </thead>
-
+        <tbody>
     {% if not request.user.is_superuser %}
         {% for data in object_list %}
             <tr>
                 <th>{{data.id}}</th>
                 <th>{{data.name}}</th>
                 <th>{{data.source_url}}</th>
+                <th><img src="{{ data.avatar.url }}" height="80" width="80"></th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'source_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
             </tr>
         {% endfor %}
@@ -34,6 +36,7 @@
                 <th>{{data.id}}</th>
                 <th>{{data.name}}</th>
                 <th>{{data.source_url}}</th>
+                <th><img src="{{ data.avatar.url }}" height="80" width="80"></th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'source_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
                 <th><button type="button" class="btn btn-warning"><a href="{% url 'source_update' data.id %}" class="nav-link px-2 text-black">Edit</a></button>
                 <button type="button" class="btn btn-danger"><a href="{% url 'source_delete' data.id %}" class="nav-link px-2 text-black">Delete</a></button></th>

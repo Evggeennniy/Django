@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 def user_avatar(instance, filename):
     # Hard logic to create path to saved folder
-    return f'user_{instance.id}/{filename}'
+    return f'media/user_{instance.id}/{filename}'
 
 
 class User(AbstractUser):

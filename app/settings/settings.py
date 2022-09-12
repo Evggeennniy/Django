@@ -143,7 +143,7 @@ STATIC_ROOT = 'settings/static/'
 
 MEDIA_URL = 'media/'
 # ^ All include in settings have this startpath
-MEDIA_ROOT = BASE_DIR / '..' / 'static_content' / 'media'
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
 # ^ Path to media directory
 
 # ^ Setted Static place

@@ -76,7 +76,7 @@ def parse_privatbank():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/privatbanklogo.png'})[0]
     # ^ Search to name or create to default args
 
     for rate_data in url_data:
@@ -131,7 +131,7 @@ def parse_monobank():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/monobanklogo.png'})[0]
 
     for rate_data in url_data:
         ccy = str(rate_data['currencyCodeA'])
@@ -180,7 +180,7 @@ def parse_vkurseua():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/vkurseualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data
@@ -243,7 +243,7 @@ def parse_ukrainekurs():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/kursualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
@@ -301,7 +301,7 @@ def parse_financeua():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/financeualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
@@ -359,7 +359,7 @@ def parse_bankcreditdnepr():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/bankdneprologo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
