@@ -1,0 +1,25 @@
+<div>
+        <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1&{{ filter_params }}">&laquo; First</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}">Previous</a></li>
+                {% else %}
+                        <li class="page-item disabled"><a class="page-link">&laquo; First</a></li>
+                        <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                {% endif %}
+
+                <button class="btn btn-sm disabled ">
+                        <a class="nav-link px-2 text-black "> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. </a>
+                </button>
+
+                {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{ filter_params }}">Last &raquo;</a></li>
+                {% else %}
+                        <li class="page-item disabled"><a class="page-link">Next</a></li>
+                        <li class="page-item disabled"><a class="page-link">Last &raquo;</a></li>
+                {% endif %}
+
+        </ul> 
+
+</div>

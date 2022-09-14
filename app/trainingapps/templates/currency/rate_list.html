@@ -1,15 +1,35 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
 
 {% block table %}
 
 <div class="container mt-3">
     <h2>Currency Rate Statistics</h2>
     <p>List for collecting and displaying information about currency changes.</p>
+
     <div class="d-grid">
         <button type="button" class="btn btn-primary btn-block"><a href="{% url 'rate_create' %}" class="nav-link px-2 text-black">Create Rate</a></button>
       </div>
       <br>
+    
+    <form method="get">
+        {{ filter.form | crispy }}
+            
+        <label for="id_page_size">Item per page</label>
+        <select name="page_size" id="id_page_size">
+            {% for page_size_option in page_size_options %}
+                <option value="{{ page_size_option }}"
+                    {% if page_size == page_size_option %}selected{% endif %}>
+                    {{ page_size_option }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+    
+    <br>
     <table class="table table-white table-striped table-bordered">
         <thead>
             <tr>
@@ -54,6 +74,8 @@
     {% endif %}
         </tbody>
     </table>
-</div>
 
+    {% include 'parts/paginator.html' %}
+
+</div>
 {% endblock table %}
