@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'accounts',
     'rangefilter',
     'import_export',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -133,8 +135,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'staticfile/'
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / '..' / 'static_content' / 'img',
+]
 STATIC_ROOT = 'settings/static/'
+
+MEDIA_URL = 'media/'
+# ^ All include in settings have this startpath
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content'
+# ^ Path to media directory
 
 # ^ Setted Static place
 # Default primary key field type
@@ -203,3 +213,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/2'),
     },
 }  # ^ 'keyname': {'task': 'path to func', 'schedule': crontab(set time to do func)}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

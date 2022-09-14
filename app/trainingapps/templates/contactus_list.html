@@ -1,30 +1,54 @@
 {% extends "base.html" %}
 
 {% block table %}
+
+<div class="container mt-3">
+    <h2>Node to contact us!</h2>
+    <div class="d-grid">
+        <button type="button" class="btn btn-primary btn-block"><a href="{% url 'contactus_create' %}" class="nav-link px-2 text-black">Send a message</a></button>
+      </div>
+      <br>
+    <table class="table table-white table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EMAIL FROM</th>
+                <th>EMAIL TO</th>
+                <th>SUBJECT</th>
+                <th>MESSAGE</th>
+                <th>OPTIONS</th>
+            </tr>
+        </thead>
+
+    {% if not request.user.is_superuser %}
+        {% for data in object_list %}
+            <tr>
+                <th>{{data.id}}</th>
+                <th>{{data.email_from}}</th>
+                <th>{{data.email_to}}</th>
+                <th>{{data.subject}}</th>
+                <th>{{data.message}}</th>
+                <th><button type="button" class="btn btn-info"><a href="{% url 'contactus_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
+            </tr>
+        {% endfor %}
     
-    <p>ContactUs list</p>
-    <a href="{% url 'contactus_create' %}">Create new data.</a>
+    {% elif request.user.is_superuser %}
+        {% for data in object_list %}
+            <tr>
+                <th>{{data.id}}</th>
+                <th>{{data.email_from}}</th>
+                <th>{{data.email_to}}</th>
+                <th>{{data.subject}}</th>
+                <th>{{data.message}}</th>
+                <th><button type="button" class="btn btn-info"><a href="{% url 'contactus_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
+                <th><button type="button" class="btn btn-warning"><a href="{% url 'contactus_update' data.id %}" class="nav-link px-2 text-black">Edit</a></button>
+                <button type="button" class="btn btn-danger"><a href="{% url 'contactus_delete' data.id %}" class="nav-link px-2 text-black">Delete</a></button></th>
 
-
-<table>
-    <tr>
-        <th style="background-color: yellow">id</th>
-        <th style="background-color: green">Email from</th>
-        <th style="background-color: green">Email to</th>
-        <th style="background-color: red">Subject</th>
-        <th style="background-color: blue">Message</th>
-    </tr>
-    {% for data in object_list %}
-    <tr>
-        <td style="background-color: yellow">{{data.id}}</td>
-        <td style="background-color: green">{{data.email_from}}</td>
-        <td style="background-color: green">{{data.email_to}}</td>
-        <td style="background-color: red">{{data.subject}}</td>
-        <td style="background-color: blue">{{data.message}}</td>
-        <td style="background-color: white"><a href="{% url 'contactus_detail' data.id %}">View Details</a></td>
-        <td style="background-color: white"><a href="{% url 'contactus_update' data.id %}">Edit</a></td>
-        <td style="background-color: white"><a href="{% url 'contactus_delete' data.id %}">Delete</a></td>
-    </tr>
-    {% endfor %}
+            </tr>
+        {% endfor %}
+    {% endif %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock table %}

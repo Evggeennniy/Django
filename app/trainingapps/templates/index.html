@@ -1,18 +1,55 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block table %}
-    <div>
-      Currency-value table: <a href="{% url 'rate_list' %}">Click her</a>
+
+<main>
+
+  <div class="container marketing">
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1">What can we offer? <span class="text-muted">Analytics Services.</span></h2>
+        <p class="lead">We were created to help you, our service collects the information required by the client on a daily basis so that you have more time to take care of yourself.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="{% static '/main0' %}" height="500" width="500">
+      </div>
     </div>
-    <div>
-      Contact's-mail table: <a href="{% url 'contactus_list' %}">Click her</a>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">We are always ready to listen to you. <span class="text-muted">Support.</span></h2>
+        <p class="lead">We are always waiting for your message to our email, it will help us to be better.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="{% static '/main1' %}" height="500" width="500">
+      </div>
     </div>
-    <div>
-      Source-url table: <a href="{% url 'source_list' %}">Click her</a>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1">Premium account. <span class="text-muted">Paid services.</span></h2>
+        <p class="lead">Something that can make your life easier. Add a few hours of free time, and more accurate statistics by collecting information from even greater sources!</p>
+      </div>
+      <div class="col-md-5">
+        <img src="{% static '/main2' %}" height="500" width="500">
+      </div>
     </div>
-    <div>
-      <a href="{% url 'response_list' %}">Response table info</a>
-    </div>
-    <div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+
+</main>
 
 {% endblock table %}

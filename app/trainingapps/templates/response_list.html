@@ -1,27 +1,38 @@
 {% extends "base.html" %}
 
 {% block table %}
-    
-    <p>Response list</p>
 
-<table> 
-    <tr>
-        <th style="background-color: yellow">id</th>
-        <th style="background-color: green">Path</th>
-        <th style="background-color: green">Request method</th>
-        <th style="background-color: red">Query params</th>
-        <th style="background-color: blue">Ip</th>
-        <th style="background-color: whitesmoke">Response time</th>
-    </tr>
-    {% for data in object_list %}
-    <tr>
-        <td style="background-color: yellow">{{data.id}}</td>
-        <td style="background-color: green">{{data.path}}</td>
-        <td style="background-color: green">{{data.request_method}}</td>
-        <td style="background-color: red">{{data.query_params}}</td>
-        <td style="background-color: blue">{{data.ip}}</td>
-        <td style="background-color: whitesmoke">{{data.response_time}}</td>
-    </tr>
-    {% endfor %}
+<div class="container mt-3">
+    <h2>Logs Information</h2>
+    <table class="table table-white table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>PATH</th>
+                <th>REQUEST METHOD</th>
+                <th>REQUEST PARAMS</th>
+                <th>IP ADRESS </th>
+                <th>RESPONSE TIME</th>
+            </tr>
+        </thead>
+
+    {% if request.user.is_superuser %}
+        {% for data in object_list %}
+            <tr>
+                <th>{{data.id}}</th>
+                <th>{{data.path}}</th>
+                <th>{{data.request_method}}</th>
+                <th>{{data.query_params}}</th>
+                <th>{{data.ip}}</th>
+                <th>{{data.response_time}}</th>
+            </tr>
+        {% endfor %}
+    
+    {% elif not request.user.is_superuser %}
+        <h2>ACCESS DENIED</h2>
+    {% endif %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock table %}

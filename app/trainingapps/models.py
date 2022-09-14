@@ -16,6 +16,7 @@ class ContactUs(models.Model):
 class Source(models.Model):
     source_url = models.CharField(max_length=255)
     name = models.CharField(max_length=64)
+    avatar = models.FileField(upload_to='logo')
 
 
 class Rate(models.Model):

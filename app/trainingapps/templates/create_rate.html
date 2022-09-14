@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block table %}
-
-    <p>Create Rate Data</p>
-
-    <form method="post">
+    <br>
+    <form method="post" class="container w-50 form-control">
+        <h2>Create Rate Data</h2>
+        <br>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-        <a href="{% url 'rate_list' %}">BACK</a>
+        <!-- {{ form.as_p }} -->
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-success">CREATE</button>
+        <button type="button" class="btn btn-secondary"><a href="{% url 'rate_list' %}" class="nav-link px-2">BACK</a></button>
     </form>
 
 {% endblock table %} 

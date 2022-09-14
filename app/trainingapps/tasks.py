@@ -1,10 +1,28 @@
 from celery import shared_task
 from django.core.mail import send_mail
+from django.urls import reverse
+from settings.settings import EMAIL_HOST_USER, HTTP_SHEM, DOMAIN
 
 from trainingapps import utils
 from trainingapps import model_choises as mch
 
 from bs4 import BeautifulSoup
+
+
+@shared_task
+def send_activation_email(username, email_to):  # 3.Method send email
+    subject = 'Activate your account'
+    message = f"""
+    Activation link: {HTTP_SHEM}://{DOMAIN}{reverse('user_activate', args=(username, ))}
+    """  # ^ args=(self.instance.username, ) !
+
+    send_mail(
+        subject,
+        message,
+        EMAIL_HOST_USER,
+        [email_to],
+        fail_silently=False,
+    )
 
 
 @shared_task
@@ -58,7 +76,7 @@ def parse_privatbank():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/privatbanklogo.png'})[0]
     # ^ Search to name or create to default args
 
     for rate_data in url_data:
@@ -113,7 +131,7 @@ def parse_monobank():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/monobanklogo.png'})[0]
 
     for rate_data in url_data:
         ccy = str(rate_data['currencyCodeA'])
@@ -162,7 +180,7 @@ def parse_vkurseua():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/vkurseualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data
@@ -225,7 +243,7 @@ def parse_ukrainekurs():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/kursualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
@@ -283,7 +301,7 @@ def parse_financeua():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/financeualogo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
@@ -341,7 +359,7 @@ def parse_bankcreditdnepr():
 
     source = Source.objects.get_or_create(
         name=source_name,
-        defaults={'name': source_name, 'source_url': url})[0]
+        defaults={'name': source_name, 'source_url': url, 'avatar': 'logo/bankdneprologo.png'})[0]
 
     for rate_data in url_data:
         ccy = rate_data['ccy']
