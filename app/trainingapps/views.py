@@ -11,6 +11,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # will depend on the presence of the user's sessionid key
 from django.contrib.auth.mixins import UserPassesTestMixin
 # ^ Users pass
+from django_filters.views import FilterView
+# ^ Used filter views for filter in listview
+from trainingapps.filters import RateFilter
 """
 USERS PASS
 """
@@ -30,16 +33,48 @@ CRUD WORKING WITH GENERAL
 
 
 class IndexView(TemplateView):
-    template_name = "index.html"
+    template_name = "currency/index.html"
 
 
-class RateListView(LoginRequiredMixin, ListView):
+class RateListView(LoginRequiredMixin, FilterView):
     queryset = Rate.objects.all().select_related("source")
     # ^ .select_related() = JOIN table
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
 
-    template_name = "rate_list.html"
+    page_size_options = [10, 15, 20]
+    filterset_class = RateFilter
+
+    template_name = "currency/rate_list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        filter_params = self.request.GET.copy()
+
+        if self.page_kwarg in filter_params:
+            del filter_params[self.page_kwarg]
+        # ^ Delete old filter params
+
+        context['filter_params'] = filter_params.urlencode()
+        context['page_size'] = self.get_paginate_by()
+        context['page_size_options'] = self.page_size_options
+        # ^ Put to context a needed params
+
+        return context
+    # ^ Fix url request get params
+
+    def get_paginate_by(self, queryset=None):
+        """
+        Get page size from params or get default
+        """
+        if 'page_size' in self.request.GET:
+            paginate_by = int(self.request.GET['page_size'])
+        else:
+            paginate_by = 15
+
+        return paginate_by
+    # ^ Set objects in page
 
 
 class ContactUsListView(LoginRequiredMixin, ListView):
@@ -47,7 +82,7 @@ class ContactUsListView(LoginRequiredMixin, ListView):
     form_class = ContactUsForm
     success_url = reverse_lazy("contactus_list")
 
-    template_name = "contactus_list.html"
+    template_name = "currency/contactus_list.html"
 
 
 class SourceListView(LoginRequiredMixin, ListView):
@@ -55,7 +90,7 @@ class SourceListView(LoginRequiredMixin, ListView):
     form_class = SourceForm
     success_url = reverse_lazy("source_list")
 
-    template_name = "source_list.html"
+    template_name = "currency/source_list.html"
 
 
 class ResponseLogListView(LoginRequiredMixin, ListView):
@@ -63,7 +98,7 @@ class ResponseLogListView(LoginRequiredMixin, ListView):
     form_class = ResponseLogForm
     success_url = reverse_lazy("response_list")
 
-    template_name = "response_list.html"
+    template_name = "currency/response_list.html"
 
 
 """
@@ -76,13 +111,13 @@ class RateCreateView(CreateView):
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
 
-    template_name = "create_rate.html"
+    template_name = "currency/create_rate.html"
 
 
 class RateDetailsView(DeleteView):
     queryset = Rate.objects.all()
 
-    template_name = "detail_rate.html"
+    template_name = "currency/detail_rate.html"
 
 
 class RateUpdateView(OnlySuperUser, UpdateView):
@@ -90,14 +125,14 @@ class RateUpdateView(OnlySuperUser, UpdateView):
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
 
-    template_name = "update_rate.html"
+    template_name = "currency/update_rate.html"
 
 
 class RateDeleteView(OnlySuperUser, DeleteView):
     queryset = Rate.objects.all()
     success_url = reverse_lazy("rate_list")
 
-    template_name = "delete_rate.html"
+    template_name = "currency/delete_rate.html"
 
 
 """
@@ -110,7 +145,7 @@ class ContactUsCreateView(CreateView):
     form_class = ContactUsForm
     success_url = reverse_lazy("contactus_list")
 
-    template_name = "create_contactus.html"
+    template_name = "currency/create_contactus.html"
 
     # def get_form(self, form_class=None):
     #     form = super().get_form(form_class)
@@ -131,7 +166,7 @@ class ContactUsCreateView(CreateView):
 class ContactUsDetailsView(DeleteView):
     queryset = ContactUs.objects.all()
 
-    template_name = "detail_contactus.html"
+    template_name = "currency/detail_contactus.html"
 
 
 class ContactUsUpdateView(UpdateView):
@@ -139,14 +174,14 @@ class ContactUsUpdateView(UpdateView):
     form_class = ContactUsForm
     success_url = reverse_lazy("contactus_list")
 
-    template_name = "update_contactus.html"
+    template_name = "currency/update_contactus.html"
 
 
 class ContactUsDeleteView(DeleteView):
     queryset = ContactUs.objects.all()
     success_url = reverse_lazy("contactus_list")
 
-    template_name = "delete_contactus.html"
+    template_name = "currency/delete_contactus.html"
 
 
 """
@@ -159,13 +194,13 @@ class SourceCreateView(CreateView):
     form_class = SourceForm
     success_url = reverse_lazy("source_list")
 
-    template_name = "create_source.html"
+    template_name = "currency/create_source.html"
 
 
 class SourceDetailsView(DeleteView):
     queryset = Source.objects.all()
 
-    template_name = "detail_source.html"
+    template_name = "currency/detail_source.html"
 
 
 class SourceUpdateView(UpdateView):
@@ -173,11 +208,11 @@ class SourceUpdateView(UpdateView):
     form_class = SourceForm
     success_url = reverse_lazy("source_list")
 
-    template_name = "update_source.html"
+    template_name = "currency/update_source.html"
 
 
 class SourceDeleteView(DeleteView):
     queryset = SourceListView.queryset
     success_url = reverse_lazy("source_list")
 
-    template_name = "delete_source.html"
+    template_name = "currency/delete_source.html"
