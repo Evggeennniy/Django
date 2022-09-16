@@ -9,6 +9,9 @@ runserver:
 runshellplus:
 	$(manage_py) shell_plus  --print-sql
 
+showurls:
+	$(manage_py) show_urls
+
 makemigrate:
 	$(manage_py) makemigrations
 
