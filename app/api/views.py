@@ -10,6 +10,12 @@ from drf_excel.renderers import XLSXRenderer
 from drf_excel.mixins import XLSXFileMixin
 # ^ Work with dfr_excel export render
 
+from api.pagination import RatePagination
+from app.api.filters import RateFilter
+
+from django_filters import rest_framework as filters
+from rest_framework import filters as rest_framework_filters
+
 
 class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
     queryset = models.Rate.objects.all()
@@ -18,6 +24,19 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
     renderer_classes = [JSONRenderer, XLSXRenderer]
     filename = 'rate_datas.xlsx'
     # ^ Setted finename to exporting and rederer classes.
+
+    pagination_class = RatePagination
+
+    filterset_class = RateFilter
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        rest_framework_filters.OrderingFilter,
+    )
+
+    ordering_fields = ['id', 'buy', 'sale']
+    # ^ Sorting by 'ordering=id' or 'ordering=id,buy'
+    # Sorting by criteria, from largest to smallest, if necessary, on the contrary, add '-' before the argument
+
 # ^ This class performs all actions that were available in the classes above.
 
 
