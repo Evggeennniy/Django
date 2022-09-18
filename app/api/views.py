@@ -21,7 +21,7 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
 # ^ This class performs all actions that were available in the classes above.
 
 
-class SourceViewSet(viewsets.ModelViewSet):
+class SourceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Source.objects.all()
     serializer_class = serializer.SourceSerializer
 
