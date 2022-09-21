@@ -228,9 +228,13 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  # ^ Authentication method, rules per view
 
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),  # ^ For all views user most have a permission. Gloval rules for view.
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),  # ^ For all views user most have a permission. Gloval rules for view.
+
+    'DEFAULT_THROTTLE_RATES': {
+        'currency': '20/min',
+    },  # ^ Setting for throttles class
 }
 # ^ Setting of rest framework
 

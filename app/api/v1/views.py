@@ -1,17 +1,18 @@
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
+from app.api.v1 import throttles
 # ^ Work with rest framework
 
 from trainingapps import models
-from api import serializer
+from api.v1 import serializer
 # ^ Work with serializer
 
 from drf_excel.renderers import XLSXRenderer
 from drf_excel.mixins import XLSXFileMixin
 # ^ Work with dfr_excel export render
 
-from api.pagination import RatePagination
-from app.api.filters import RateFilter
+from api.v1.pagination import RatePagination
+from app.api.v1.filters import RateFilter
 
 from django_filters import rest_framework as filters
 from rest_framework import filters as rest_framework_filters
@@ -37,6 +38,7 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
     # ^ Sorting by 'ordering=id' or 'ordering=id,buy'
     # Sorting by criteria, from largest to smallest, if necessary, on the contrary, add '-' before the argument
 
+    throttle_classes = [throttles.AnonCurrencyThrottle]
 # ^ This class performs all actions that were available in the classes above.
 
 
@@ -48,6 +50,17 @@ class SourceViewSet(viewsets.ReadOnlyModelViewSet):
 class ContactUsViewSet(viewsets.ModelViewSet):
     queryset = models.ContactUs.objects.all()
     serializer_class = serializer.ContactUsSerializer
+
+    def create(self, validated_data):
+        from trainingapps.tasks import sending_mail
+
+        sending_mail.delay(
+            subject=validated_data.data.get('subject'),
+            email_from=validated_data.data.get('email_from'),
+            email_to=validated_data.data.get('email_to')
+        )
+
+        return super().create(validated_data)
 
 # # class RatesView(generics.ListAPIView, generics.CreateAPIView):
 # class RatesView(generics.ListCreateAPIView):
