@@ -21,6 +21,7 @@ class SourceSerializer(ModelSerializer):
     class Meta:
         model = models.Source
         fields = (
+            'id',
             'name',
             'source_url'
         )
@@ -30,6 +31,7 @@ class ContactUsSerializer(ModelSerializer):
     class Meta:
         model = models.ContactUs
         fields = (
+            'id',
             'email_from',
             'email_to',
             'subject',

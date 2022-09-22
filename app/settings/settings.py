@@ -234,6 +234,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_THROTTLE_RATES': {
         'currency': '20/min',
+        'contactus': '5/day'
     },  # ^ Setting for throttles class
 }
 # ^ Setting of rest framework

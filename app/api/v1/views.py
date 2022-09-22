@@ -11,8 +11,8 @@ from drf_excel.renderers import XLSXRenderer
 from drf_excel.mixins import XLSXFileMixin
 # ^ Work with dfr_excel export render
 
-from api.v1.pagination import RatePagination
-from app.api.v1.filters import RateFilter
+from api.v1 import pagination
+from app.api.v1 import filters as viewfilters
 
 from django_filters import rest_framework as filters
 from rest_framework import filters as rest_framework_filters
@@ -26,9 +26,9 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
     filename = 'rate_datas.xlsx'
     # ^ Setted finename to exporting and rederer classes.
 
-    pagination_class = RatePagination
+    pagination_class = pagination.RatePagination
 
-    filterset_class = RateFilter
+    filterset_class = viewfilters.RateFilter
     filter_backends = (
         filters.DjangoFilterBackend,
         rest_framework_filters.OrderingFilter,
@@ -46,10 +46,32 @@ class SourceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Source.objects.all()
     serializer_class = serializer.SourceSerializer
 
+    pagination_class = pagination.SourcePagination
+
+    filterset_class = viewfilters.SourceFilter
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        rest_framework_filters.OrderingFilter,
+    )
+
+    ordering_fields = ['id', 'name']
+
+    throttle_classes = [throttles.AnonCurrencyThrottle]
+
 
 class ContactUsViewSet(viewsets.ModelViewSet):
     queryset = models.ContactUs.objects.all()
     serializer_class = serializer.ContactUsSerializer
+
+    filterset_class = viewfilters.ContactUsFilter
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        rest_framework_filters.OrderingFilter,
+    )
+
+    ordering_fields = ['id', 'email_from', 'email_to', 'subject']
+
+    throttle_classes = [throttles.AnonSupportsThrottle]
 
     def create(self, validated_data):
         from trainingapps.tasks import sending_mail
