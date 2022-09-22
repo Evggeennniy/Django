@@ -63,11 +63,27 @@ class ContactUsViewSet(viewsets.ModelViewSet):
     queryset = models.ContactUs.objects.all()
     serializer_class = serializer.ContactUsSerializer
 
+    pagination_class = pagination.SupportPagination
+
     filterset_class = viewfilters.ContactUsFilter
     filter_backends = (
         filters.DjangoFilterBackend,
         rest_framework_filters.OrderingFilter,
+        rest_framework_filters.SearchFilter,
     )
+
+    search_fields = ['username', 'email']
+    # ^ Search filter fields - ?search=Benner
+
+    # The search behavior may be restricted by prepending various characters to the search_fields.
+
+    # '^' Starts-with search.
+    # '=' Exact matches.
+    # '@' Full-text search. (Currently only supported Django's PostgreSQL backend.)
+    # '$' Regex search.
+
+    # For example:
+    # search_fields = ['=username', '=email']
 
     ordering_fields = ['id', 'email_from', 'email_to', 'subject']
 

@@ -232,6 +232,10 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # ),  # ^ For all views user most have a permission. Gloval rules for view.
 
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+
     'DEFAULT_THROTTLE_RATES': {
         'currency': '20/min',
         'contactus': '5/day'
