@@ -13,39 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# Default import
 from django.urls import path
-# ListView
-from trainingapps.views import ContactUsListView, RateListView, SourceListView
-# EditView
-from trainingapps.views import RateCreateView, RateUpdateView, RateDeleteView, RateDetailsView
-from trainingapps.views import SourceCreateView, SourceUpdateView, SourceDeleteView, SourceDetailsView
-from trainingapps.views import ContactUsCreateView, ContactUsUpdateView, ContactUsDeleteView, ContactUsDetailsView
-from trainingapps.views import ResponseLogListView
+from trainingapps import views
 
 
 urlpatterns = [
     # Rate
-    path('rate', RateListView.as_view(), name='rate_list'),
-    path('rate/create', RateCreateView.as_view(), name='rate_create'),
-    path('rate/update/<int:pk>', RateUpdateView.as_view(), name='rate_update'),
-    path('rate/detail/<int:pk>', RateDetailsView.as_view(), name='rate_detail'),
-    path('rate/delete/<int:pk>', RateDeleteView.as_view(), name='rate_delete'),
+    path('rate', views.RateListView.as_view(), name='rate_list'),
+    path('rate/create', views.RateCreateView.as_view(), name='rate_create'),
+    path('rate/update/<int:pk>', views.RateUpdateView.as_view(), name='rate_update'),
+    path('rate/detail/<int:pk>', views.RateDetailsView.as_view(), name='rate_detail'),
+    path('rate/delete/<int:pk>', views.RateDeleteView.as_view(), name='rate_delete'),
+
 
     # ContactUs
-    path('contactus', ContactUsListView.as_view(), name='contactus_list'),
-    path('contactus/create', ContactUsCreateView.as_view(), name='contactus_create'),
-    path('contactus/update/<int:pk>', ContactUsUpdateView.as_view(), name='contactus_update'),
-    path('contactus/detail/<int:pk>', ContactUsDetailsView.as_view(), name='contactus_detail'),
-    path('contactus/delete/<int:pk>', ContactUsDeleteView.as_view(), name='contactus_delete'),
+    path('contactus', views.ContactUsListView.as_view(), name='contactus_list'),
+    path('contactus/create', views.ContactUsCreateView.as_view(), name='contactus_create'),
+    path('contactus/update/<int:pk>', views.ContactUsUpdateView.as_view(), name='contactus_update'),
+    path('contactus/detail/<int:pk>', views.ContactUsDetailsView.as_view(), name='contactus_detail'),
+    path('contactus/delete/<int:pk>', views.ContactUsDeleteView.as_view(), name='contactus_delete'),
 
     # Source
-    path('source', SourceListView.as_view(), name='source_list'),
-    path('source/create', SourceCreateView.as_view(), name='source_create'),
-    path('source/update/<int:pk>', SourceUpdateView.as_view(), name='source_update'),
-    path('source/detail/<int:pk>', SourceDetailsView.as_view(), name='source_detail'),
-    path('source/delete/<int:pk>', SourceDeleteView.as_view(), name='source_delete'),
+    path('source', views.SourceListView.as_view(), name='source_list'),
+    path('source/create', views.SourceCreateView.as_view(), name='source_create'),
+    path('source/update/<int:pk>', views.SourceUpdateView.as_view(), name='source_update'),
+    path('source/detail/<int:pk>', views.SourceDetailsView.as_view(), name='source_detail'),
+    path('source/delete/<int:pk>', views.SourceDeleteView.as_view(), name='source_delete'),
 
     # ResponseLog
-    path('responselog/table', ResponseLogListView.as_view(), name='response_list'),
+    path('responselog/table', views.ResponseLogListView.as_view(), name='response_list'),
 ]

@@ -2,7 +2,12 @@ Django==4.*
 django_extensions==3.2.*
 django-admin-rangefilter==0.8.*
 django-import-export==2.8.*
+djangorestframework==3.13.*
+djangorestframework-simplejwt==5.2.*
 django-filter==22.*
+drf-excel==2.1.*
+drf-yasg==1.21.*
+
 ipython==8.4.*
 Celery==5.2.*
 

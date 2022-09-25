@@ -26,8 +26,9 @@ urlpatterns = [
     path('', IndexView.as_view(), name='main'),
     # ^ Main page
 
-    path('data/', include('trainingapps.urls')),
+    path('currency/', include('trainingapps.urls')),
     path('accounts/', include('accounts.urls')),
+    path('api/', include('api.v1.urls')),
     # ^ Include app urls
 
     path('admin/', admin.site.urls),

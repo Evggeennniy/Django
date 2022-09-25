@@ -32,6 +32,6 @@ class Rate(models.Model):
 class ResponseLog(models.Model):
     response_time = models.DecimalField(max_digits=10, decimal_places=4)
     request_method = models.CharField(max_length=4)
-    query_params = models.CharField(max_length=20)
+    query_params = models.CharField(max_length=20, null=True)
     ip = models.CharField(max_length=20)
     path = models.CharField(max_length=20)
