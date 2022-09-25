@@ -1,0 +1,442 @@
+[
+    {
+        "model": "trainingapps.rate",
+        "pk": 343,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "40.00",
+            "sell": "40.40",
+            "source": 28
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 344,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "36.57",
+            "sell": "37.50",
+            "source": 29
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 345,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.27",
+            "sell": "37.50",
+            "source": 29
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 346,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.58",
+            "sell": "40.40",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 347,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "39.22",
+            "sell": "40.24",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 348,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.11",
+            "sell": "40.03",
+            "source": 31
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 349,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "38.64",
+            "sell": "39.91",
+            "source": 31
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 350,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "36.65",
+            "sell": "37.50",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 351,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.40",
+            "sell": "37.30",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 352,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "USD",
+            "buy": "0.99",
+            "sell": "1.00",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 353,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "36.57",
+            "sell": "37.31",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 354,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.26",
+            "sell": "37.17",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 355,
+        "fields": {
+            "ccy": "BTC",
+            "base_ccy": "USD",
+            "buy": "18142.15",
+            "sell": "20051.85",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 356,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "41.30",
+            "sell": "41.70",
+            "source": 28
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 357,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "40.50",
+            "sell": "41.15",
+            "source": 28
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 358,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.15",
+            "sell": "37.50",
+            "source": 29
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 359,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.14",
+            "sell": "37.45",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 360,
+        "fields": {
+            "ccy": "BTC",
+            "base_ccy": "USD",
+            "buy": "18465.60",
+            "sell": "20409.35",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 361,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "36.57",
+            "sell": "37.50",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 362,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.70",
+            "sell": "37.60",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 363,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "USD",
+            "buy": "0.99",
+            "sell": "1.01",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 364,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.72",
+            "sell": "40.66",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 365,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "39.34",
+            "sell": "40.51",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 366,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.55",
+            "sell": "36.13",
+            "source": 31
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 368,
+        "fields": {
+            "ccy": "BTC",
+            "base_ccy": "USD",
+            "buy": "18402.62",
+            "sell": "20339.74",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 369,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "41.50",
+            "sell": "41.80",
+            "source": 28
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 370,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "40.60",
+            "sell": "41.10",
+            "source": 28
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 371,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.71",
+            "sell": "37.59",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 372,
+        "fields": {
+            "ccy": "BTC",
+            "base_ccy": "USD",
+            "buy": "20688.90",
+            "sell": "22866.68",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 373,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.65",
+            "sell": "37.80",
+            "source": 29
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 374,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "36.65",
+            "sell": "37.50",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 375,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "UAH",
+            "buy": "36.85",
+            "sell": "37.75",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 376,
+        "fields": {
+            "ccy": "EUR",
+            "base_ccy": "USD",
+            "buy": "1.00",
+            "sell": "1.01",
+            "source": 32
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 377,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.76",
+            "sell": "40.70",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 378,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "39.57",
+            "sell": "40.82",
+            "source": 30
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 388,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "43.00",
+            "sell": "33.00",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 389,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "43.00",
+            "sell": "33.00",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 390,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "43.00",
+            "sell": "33.00",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 391,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "46.00",
+            "sell": "36.00",
+            "source": 33
+        }
+    },
+    {
+        "model": "trainingapps.rate",
+        "pk": 392,
+        "fields": {
+            "ccy": "USD",
+            "base_ccy": "UAH",
+            "buy": "43.00",
+            "sell": "45.00",
+            "source": null
+        }
+    }
+]
