@@ -19,7 +19,7 @@ from rest_framework import filters as rest_framework_filters
 
 
 class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
-    queryset = models.Rate.objects.all()
+    queryset = models.Rate.objects.get_queryset().order_by('id')
     serializer_class = serializer.RateSerializer
 
     renderer_classes = [JSONRenderer, XLSXRenderer]
@@ -43,7 +43,7 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
 
 
 class SourceViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Source.objects.all()
+    queryset = models.Source.objects.get_queryset().order_by('id')
     serializer_class = serializer.SourceSerializer
 
     pagination_class = pagination.SourcePagination
@@ -60,7 +60,7 @@ class SourceViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ContactUsViewSet(viewsets.ModelViewSet):
-    queryset = models.ContactUs.objects.all()
+    queryset = models.ContactUs.objects.get_queryset().order_by('id')
     serializer_class = serializer.ContactUsSerializer
 
     pagination_class = pagination.SupportPagination
