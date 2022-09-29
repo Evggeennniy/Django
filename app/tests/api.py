@@ -63,7 +63,7 @@ def test_contactus_validdata_post(mailoutbox):
     assert response.request['REQUEST_METHOD'] == 'POST'
     assert response.__dict__['accepted_media_type'] == 'application/json'
 
-    assert len(mailoutbox) == 1  # Create & Send
+    assert len(mailoutbox) == 1
     assert mailoutbox[0].to[0] == data['email_to']
 
     del response.json()['id']
@@ -91,7 +91,7 @@ def test_contactus_invaliddata_post(mailoutbox):
     assert response.request['REQUEST_METHOD'] == 'POST'
     assert response.__dict__['accepted_media_type'] == 'application/json'
 
-    assert len(mailoutbox) == 1  # Create & Not send
+    assert len(mailoutbox) == 0
     assert response.json() == {
         'email_to': ['Enter a valid email address.'],
         'subject': ['This field may not be blank.'],
