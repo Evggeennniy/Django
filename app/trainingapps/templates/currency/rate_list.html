@@ -39,6 +39,7 @@
                 <th>BUY</th>
                 <th>SELL</th>
                 <th>SOURCE</th>
+                <th>DATE</th>
                 <th>OPTIONS</th>
             </tr>
         </thead>
@@ -52,6 +53,7 @@
                 <th>{{data.buy}}</th>
                 <th>{{data.sell}}</th>
                 <th>{{data.source.name}}</th>
+                <th>{{data.created}}</th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'rate_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
             </tr>
         {% endfor %}
@@ -65,6 +67,7 @@
                 <th>{{data.buy}}</th>
                 <th>{{data.sell}}</th>
                 <th>{{data.source.name}}</th>
+                <th>{{data.created}}</th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'rate_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
                 <th><button type="button" class="btn btn-warning"><a href="{% url 'rate_update' data.id %}" class="nav-link px-2 text-black">Edit</a></button>
                 <button type="button" class="btn btn-danger"><a href="{% url 'rate_delete' data.id %}" class="nav-link px-2 text-black">Delete</a></button></th>

@@ -29,9 +29,9 @@ runcelbeat:
 # ^ Combining commands using &
 
 build_and_run:
-	makemigrate /
-	migrate /
-	runserver
+	$(manage_py) makemigrations 
+	$(manage_py) migrate 
+	$(manage_py) runserver
 # ^ Command launches a list of commands
 
 pytest:

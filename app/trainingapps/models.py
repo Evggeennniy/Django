@@ -4,7 +4,15 @@ from trainingapps.model_choises import CurrencyType, EmailUse
 # Create your models here.
 
 
-class ContactUs(models.Model):
+class CreatedModel(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+    # Create fields for all
+
+
+class ContactUs(CreatedModel):
     email_from = models.EmailField(max_length=30, choices=EmailUse.choices, default=EmailUse.EMAIL1)
     email_to = models.EmailField(max_length=30)
     subject = models.CharField(max_length=20)
@@ -19,7 +27,7 @@ class Source(models.Model):
     avatar = models.FileField(upload_to='logo')
 
 
-class Rate(models.Model):
+class Rate(CreatedModel):
     ccy = models.CharField(max_length=5, choices=CurrencyType.choices)
     base_ccy = models.CharField(max_length=5, choices=CurrencyType.choices, default=CurrencyType.CURRENCY_TYPE_UAH)
     buy = models.DecimalField(max_digits=10, decimal_places=2)
