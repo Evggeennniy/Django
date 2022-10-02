@@ -36,3 +36,6 @@ build_and_run:
 
 pytest:
 	pytest app/tests/
+
+parse_privatbank_archive:
+	$(manage_py) parser_privatbank_archive
