@@ -1,11 +1,11 @@
 from django.db import models
-from trainingapps.model_choises import CurrencyType, EmailUse
-
+from django.utils import timezone
+from trainingapps.model_choises import CurrencyType, EmailUse, Modules
 # Create your models here.
 
 
 class CreatedModel(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
 
     class Meta:
         abstract = True
@@ -32,9 +32,11 @@ class Rate(CreatedModel):
     base_ccy = models.CharField(max_length=5, choices=CurrencyType.choices, default=CurrencyType.CURRENCY_TYPE_UAH)
     buy = models.DecimalField(max_digits=10, decimal_places=2)
     sell = models.DecimalField(max_digits=10, decimal_places=2)
+    nbu_sell = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     # source = models.ForeignKey(Source)
     # For create foreignKey use this ^ or :
     source = models.ForeignKey('trainingapps.Source', on_delete=models.CASCADE, null=True, default=None)
+    module_that_processed = models.CharField(max_length=15, choices=Modules.choices, default='User')
 
 
 class ResponseLog(models.Model):

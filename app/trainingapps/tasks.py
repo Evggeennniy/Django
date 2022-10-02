@@ -99,6 +99,7 @@ def parse_privatbank():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
             # ^ Got last value
         except Rate.DoesNotExist:
@@ -112,6 +113,7 @@ def parse_privatbank():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
 
 
@@ -150,6 +152,7 @@ def parse_monobank():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
         except Rate.DoesNotExist:
             last_value = None
@@ -161,6 +164,7 @@ def parse_monobank():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
 
 
@@ -198,6 +202,7 @@ def parse_vkurseua():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
         except Rate.DoesNotExist:
             last_value = None
@@ -209,6 +214,7 @@ def parse_vkurseua():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
 
 
@@ -261,6 +267,7 @@ def parse_ukrainekurs():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
         except Rate.DoesNotExist:
             last_value = None
@@ -272,6 +279,7 @@ def parse_ukrainekurs():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
 
 
@@ -319,6 +327,7 @@ def parse_financeua():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
         except Rate.DoesNotExist:
             last_value = None
@@ -330,6 +339,7 @@ def parse_financeua():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
 
 
@@ -377,6 +387,7 @@ def parse_bankcreditdnepr():
                 ccy=ccy,
                 base_ccy=base_ccy,
                 source=source,
+                module_that_processed='CeleryBeat'
             ).last()
         except Rate.DoesNotExist:
             last_value = None
@@ -388,4 +399,5 @@ def parse_bankcreditdnepr():
                 buy=buy,
                 sell=sell,
                 source=source,
+                module_that_processed='CeleryBeat'
             )
