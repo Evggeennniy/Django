@@ -15,11 +15,12 @@ from api.v1 import pagination
 from app.api.v1 import filters as viewfilters
 
 from django_filters import rest_framework as filters
-from rest_framework import filters as rest_framework_filters
+from rest_framework import filters as rest_framework_filters, status
+from rest_framework.response import Response
 
 
 class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
-    queryset = models.Rate.objects.all()
+    queryset = models.Rate.objects.get_queryset().order_by('id')
     serializer_class = serializer.RateSerializer
 
     renderer_classes = [JSONRenderer, XLSXRenderer]
@@ -43,7 +44,7 @@ class RateViewSet(XLSXFileMixin, viewsets.ModelViewSet):
 
 
 class SourceViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Source.objects.all()
+    queryset = models.Source.objects.get_queryset().order_by('id')
     serializer_class = serializer.SourceSerializer
 
     pagination_class = pagination.SourcePagination
@@ -60,7 +61,7 @@ class SourceViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ContactUsViewSet(viewsets.ModelViewSet):
-    queryset = models.ContactUs.objects.all()
+    queryset = models.ContactUs.objects.get_queryset().order_by('id')
     serializer_class = serializer.ContactUsSerializer
 
     pagination_class = pagination.SupportPagination
@@ -90,15 +91,29 @@ class ContactUsViewSet(viewsets.ModelViewSet):
     throttle_classes = [throttles.AnonSupportsThrottle]
 
     def create(self, validated_data):
+
+        validdata = validated_data.data
+        serializer = self.get_serializer(data=validdata)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        subject = validdata.get('subject')
+        email_from = validdata.get('email_from')
+        email_to = validdata.get('email_to')
+        self.sending_mail(subject, email_from, email_to)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def sending_mail(self, subject, email_from, email_to):
         from trainingapps.tasks import sending_mail
 
         sending_mail.delay(
-            subject=validated_data.data.get('subject'),
-            email_from=validated_data.data.get('email_from'),
-            email_to=validated_data.data.get('email_to')
+            subject=subject,
+            email_from=email_from,
+            email_to=email_to
         )
 
-        return super().create(validated_data)
 
 # # class RatesView(generics.ListAPIView, generics.CreateAPIView):
 # class RatesView(generics.ListCreateAPIView):

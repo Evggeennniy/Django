@@ -34,4 +34,5 @@ build_and_run:
 	runserver
 # ^ Command launches a list of commands
 
-
+pytest:
+	pytest app/tests/

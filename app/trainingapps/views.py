@@ -77,7 +77,7 @@ class RateListView(LoginRequiredMixin, FilterView):
     # ^ Set objects in page
 
 
-class ContactUsListView(LoginRequiredMixin, ListView):
+class ContactUsListView(ListView):
     queryset = ContactUs.objects.all()
     form_class = ContactUsForm
     success_url = reverse_lazy("contactus_list")
