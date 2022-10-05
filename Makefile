@@ -37,5 +37,11 @@ build_and_run:
 pytest:
 	pytest app/tests/
 
+testcoverage:
+	pytest --cov=app app/tests/ --cov-report html && coverage report --fail-under=80
+
+showtestcov:
+	python3 -c "import webbrowser; webbrowser.open('.pytest_cache/coverage/index.html')"
+
 parse_privatbank_archive:
 	$(manage_py) parser_privatbank_archive
