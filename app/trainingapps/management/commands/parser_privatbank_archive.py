@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from datetime import date, timedelta
-from trainingapps.utils import get_json_from_url, datevalidator
+from trainingapps.utils import get_json_from_url, to_datetime
 from trainingapps.models import Rate, Source
 from . import utils
 from time import sleep
@@ -11,22 +11,13 @@ class Command(BaseCommand):
 
     LAST_OPERATION_DATE = date.today()
 
-    # def add_arguments(self, parser) -> None:
-    #     # Add launch parameter
-    #     parser.add_argument('-l', '--lastdate', type=int, help='Launch Params')
-
-    #     return super().add_arguments(parser)
+    def add_arguments(self, parser) -> None:
+        # Add launch parameter
+        parser.add_argument('-l', '--launch', type=str, help='Launch options.')
 
     def handle(self, *args, **options):
-
-        # runparams = options.get('launch', 'default')
-
-        # Getter run parameters
-        # if runparams == 'default':
-        #     runparams = self.LAST_OPERATION_DATE
-        # elif runparams == 'lastdate':
-        #     self.LAST_OPERATION_DATE = self.get_last_date_archive()
-        #     runparams = self.LAST_OPERATION_DATE
+        # Get options
+        self.options_handler(options)
 
         # Run module
         try:
@@ -35,6 +26,15 @@ class Command(BaseCommand):
             self.pause_or_stopped()
         except:  # NOQA
             self.timeout_and_reload()
+
+    def options_handler(self, options: dict):
+        """
+        Input parameter handler
+        """
+        launch_arg = options.get('launch', None)
+
+        if launch_arg is not None:
+            self.LAST_OPERATION_DATE = to_datetime(launch_arg)
 
     def timeout_and_reload(self, timeout: float = 3.0):
         """
@@ -82,16 +82,13 @@ class Command(BaseCommand):
         """
 
         attempts_left = max_failure
-        url = 'https://api.privatbank.ua/p24api/exchange_rates?json&date={0}.{1}.{2}'
 
         while attempts_left > 0:
-            # Anti - spam request
+            # Anti - throttle request
             sleep(3)
 
-            # Date saving
-            datestart -= timedelta(days=1)  # Get yesterday's date
-
             # Formation of url
+            url = 'https://api.privatbank.ua/p24api/exchange_rates?json&date={0}.{1}.{2}'
             url = url.format(datestart.day, datestart.month, datestart.year)
 
             # Receiving the information Json
@@ -105,7 +102,7 @@ class Command(BaseCommand):
 
             # Formation of a valid date, receipt of the source
             str_date = ratejson['date']  # Save last date
-            datetime = datevalidator(strdate=str_date)
+            datetime = to_datetime(strdate=str_date)
             source = Source.objects.get(name='PrivatBank')
 
             # Collecting data
@@ -128,4 +125,5 @@ class Command(BaseCommand):
                     )
 
             # After the code passes the body of the function without raising an exception
+            datestart -= timedelta(days=1)
             self.LAST_OPERATION_DATE -= timedelta(days=1)

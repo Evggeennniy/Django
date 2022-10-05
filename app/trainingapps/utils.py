@@ -102,7 +102,7 @@ def picker_datas_onetofour(firstdata: list, nextdata: list):
     return ready_data
 
 
-def datevalidator(strdate: str = False) -> datetime:
+def to_datetime(strdate: str = False) -> datetime:
     """
     validation format str to datetime or return date today
     """
@@ -116,7 +116,12 @@ def datevalidator(strdate: str = False) -> datetime:
 
         # it is assumed that the data is added to the api at 8 am
         validdate = datetime(year, month, day, 8, 0, 0, 0, tzinfo=timezone.utc)
-    else:
-        validdate = datetime.today()
 
     return validdate
+
+
+def get_html_mock(path: str):
+    with open(path, 'r', encoding='utf-8') as file:
+        html = file.read()
+
+        return html
