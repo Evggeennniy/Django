@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
-from app.api.v1 import throttles
+from api.v1 import throttles
 # ^ Work with rest framework
 
 from trainingapps import models
@@ -12,7 +12,7 @@ from drf_excel.mixins import XLSXFileMixin
 # ^ Work with dfr_excel export render
 
 from api.v1 import pagination
-from app.api.v1 import filters as viewfilters
+from api.v1 import filters as viewfilters
 
 from django_filters import rest_framework as filters
 from rest_framework import filters as rest_framework_filters, status

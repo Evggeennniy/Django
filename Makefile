@@ -45,3 +45,6 @@ showtestcov:
 
 parse_privatbank_archive:
 	$(manage_py) parser_privatbank_archive
+
+gunicorn:
+	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8000 --workers 9 --threads 4 --log-level info --max-requests 1 --timeout 10
