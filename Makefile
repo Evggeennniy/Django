@@ -29,10 +29,31 @@ runcelbeat:
 # ^ Combining commands using &
 
 build_and_run:
-	makemigrate /
-	migrate /
-	runserver
+	$(manage_py) makemigrations 
+	$(manage_py) migrate 
+	$(manage_py) runserver
 # ^ Command launches a list of commands
 
 pytest:
 	pytest app/tests/
+
+testcoverage:
+	pytest --cov=app app/tests/ --cov-report html && coverage report --fail-under=80
+
+showtestcov:
+	python3 -c "import webbrowser; webbrowser.open('.pytest_cache/coverage/index.html')"
+
+parse_privatbank_archive:
+	$(manage_py) parser_privatbank_archive
+
+gunicorn8001:
+	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8001 --workers 9 --threads 4 --log-level info --max-requests 1 --timeout 10
+
+gunicorn8002:
+	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8002 --workers 9 --threads 4 --log-level info --max-requests 1 --timeout 10
+
+uwsgi8001:
+	cd app && uwsgi --http-socket :8001 --module settings.wsgi --master --processes 9 --threads 4
+
+uwsgi8002:
+	cd app && uwsgi --http-socket :8002 --module settings.wsgi --master --processes 9 --threads 4

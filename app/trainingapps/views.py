@@ -37,7 +37,8 @@ class IndexView(TemplateView):
 
 
 class RateListView(LoginRequiredMixin, FilterView):
-    queryset = Rate.objects.all().select_related("source")
+    queryset = Rate.objects.get_queryset().order_by('id')
+    queryset = queryset.select_related("source")
     # ^ .select_related() = JOIN table
     form_class = RateForm
     success_url = reverse_lazy("rate_list")
@@ -78,7 +79,7 @@ class RateListView(LoginRequiredMixin, FilterView):
 
 
 class ContactUsListView(ListView):
-    queryset = ContactUs.objects.all()
+    queryset = ContactUs.objects.get_queryset().order_by('id')
     form_class = ContactUsForm
     success_url = reverse_lazy("contactus_list")
 
@@ -86,7 +87,7 @@ class ContactUsListView(ListView):
 
 
 class SourceListView(LoginRequiredMixin, ListView):
-    queryset = Source.objects.all()
+    queryset = Source.objects.get_queryset().order_by('id')
     form_class = SourceForm
     success_url = reverse_lazy("source_list")
 
@@ -94,7 +95,7 @@ class SourceListView(LoginRequiredMixin, ListView):
 
 
 class ResponseLogListView(LoginRequiredMixin, ListView):
-    queryset = ResponseLog.objects.all()
+    queryset = ResponseLog.objects.get_queryset().order_by('id')
     form_class = ResponseLogForm
     success_url = reverse_lazy("response_list")
 

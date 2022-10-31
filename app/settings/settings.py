@@ -142,7 +142,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / '..' / 'static_content' / 'img',
+    BASE_DIR / 'settings' / 'static' / 'img',
 ]
 STATIC_ROOT = 'settings/static/'
 
@@ -228,9 +228,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  # ^ Authentication method, rules per view
 
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),  # ^ For all views user most have a permission. Gloval rules for view.
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),  # ^ For all views user most have a permission. Gloval rules for view.
 
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',

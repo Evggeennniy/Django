@@ -1,5 +1,5 @@
 # low level code this
-
+from datetime import datetime, timezone
 from decimal import Decimal
 import requests
 
@@ -100,3 +100,28 @@ def picker_datas_onetofour(firstdata: list, nextdata: list):
         ready_data += [data]
 
     return ready_data
+
+
+def to_datetime(strdate: str = False) -> datetime:
+    """
+    validation format str to datetime or return date today
+    """
+    validdate = None
+
+    if strdate:
+        datesplit = strdate.split('.')
+        year = int(datesplit[2])
+        month = int(datesplit[1])
+        day = int(datesplit[0])
+
+        # it is assumed that the data is added to the api at 8 am
+        validdate = datetime(year, month, day, 8, 0, 0, 0, tzinfo=timezone.utc)
+
+    return validdate
+
+
+def get_html_mock(path: str):
+    with open(path, 'r', encoding='utf-8') as file:
+        html = file.read()
+
+        return html

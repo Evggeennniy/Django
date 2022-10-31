@@ -26,3 +26,11 @@ flake8-print==5.*
 #pytest
 pytest==7.1.*
 pytest-django==4.5.*
+pytest-cov==4.0.*
+pytest-mock==3.9.*
+
+#gunicorn
+gunicorn==20.1.*
+
+#uwsgi
+uwsgi==2.0.*

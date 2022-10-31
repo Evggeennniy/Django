@@ -16,6 +16,7 @@
                 <th>EMAIL TO</th>
                 <th>SUBJECT</th>
                 <th>MESSAGE</th>
+                <th>DATE</th>
                 <th>OPTIONS</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <th>{{data.email_to}}</th>
                 <th>{{data.subject}}</th>
                 <th>{{data.message}}</th>
+                <th>{{data.created}}</th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'contactus_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
             </tr>
         {% endfor %}
@@ -40,6 +42,7 @@
                 <th>{{data.email_to}}</th>
                 <th>{{data.subject}}</th>
                 <th>{{data.message}}</th>
+                <th>{{data.created}}</th>
                 <th><button type="button" class="btn btn-info"><a href="{% url 'contactus_detail' data.id %}" class="nav-link px-2 text-black">Details</a></button></th>
                 <th><button type="button" class="btn btn-warning"><a href="{% url 'contactus_update' data.id %}" class="nav-link px-2 text-black">Edit</a></button>
                 <button type="button" class="btn btn-danger"><a href="{% url 'contactus_delete' data.id %}" class="nav-link px-2 text-black">Delete</a></button></th>
