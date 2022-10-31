@@ -96,7 +96,7 @@ class Command(BaseCommand):
             ratedata = ratejson['exchangeRate']  # Currency data
 
             # Skip if empty data
-            if len(ratedata) == 0:
+            if not ratedata:
                 attempts_left -= 1
                 continue
 
@@ -107,7 +107,7 @@ class Command(BaseCommand):
 
             # Collecting data
             for rate in ratedata:
-                base_ccy = rate.get('baseCurrency', None)
+                base_ccy = rate.get('baseCurrency')
                 ccy = rate.get('currency', None)
                 nbu_sell = rate.get('saleRateNB')
 
