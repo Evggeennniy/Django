@@ -51,3 +51,9 @@ gunicorn8001:
 
 gunicorn8002:
 	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8002 --workers 9 --threads 4 --log-level info --max-requests 1 --timeout 10
+
+uwsgi8001:
+	cd app && uwsgi --http-socket :8001 --module settings.wsgi --master --processes 9 --threads 4
+
+uwsgi8002:
+	cd app && uwsgi --http-socket :8002 --module settings.wsgi --master --processes 9 --threads 4

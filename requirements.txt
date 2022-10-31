@@ -31,3 +31,6 @@ pytest-mock==3.9.*
 
 #gunicorn
 gunicorn==20.1.*
+
+#uwsgi
+uwsgi==2.0.*
