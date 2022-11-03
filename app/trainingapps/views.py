@@ -14,6 +14,8 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django_filters.views import FilterView
 # ^ Used filter views for filter in listview
 from trainingapps.filters import RateFilter
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 """
 USERS PASS
 """
@@ -36,6 +38,7 @@ class IndexView(TemplateView):
     template_name = "currency/index.html"
 
 
+@method_decorator(cache_page(10), name='dispatch')
 class RateListView(LoginRequiredMixin, FilterView):
     queryset = Rate.objects.get_queryset().order_by('id')
     queryset = queryset.select_related("source")
@@ -78,6 +81,7 @@ class RateListView(LoginRequiredMixin, FilterView):
     # ^ Set objects in page
 
 
+@method_decorator(cache_page(10), name='dispatch')
 class ContactUsListView(ListView):
     queryset = ContactUs.objects.get_queryset().order_by('id')
     form_class = ContactUsForm
@@ -86,6 +90,7 @@ class ContactUsListView(ListView):
     template_name = "currency/contactus_list.html"
 
 
+@method_decorator(cache_page(10), name='dispatch')
 class SourceListView(LoginRequiredMixin, ListView):
     queryset = Source.objects.get_queryset().order_by('id')
     form_class = SourceForm
@@ -94,6 +99,7 @@ class SourceListView(LoginRequiredMixin, ListView):
     template_name = "currency/source_list.html"
 
 
+@method_decorator(cache_page(30), name='dispatch')
 class ResponseLogListView(LoginRequiredMixin, ListView):
     queryset = ResponseLog.objects.get_queryset().order_by('id')
     form_class = ResponseLogForm

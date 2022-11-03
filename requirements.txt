@@ -34,3 +34,6 @@ gunicorn==20.1.*
 
 #uwsgi
 uwsgi==2.0.*
+
+#memcache
+pymemcache==4.0.*
