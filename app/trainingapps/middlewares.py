@@ -1,30 +1,30 @@
-from time import time
-from trainingapps.models import ResponseLog
+# from time import time
+# from trainingapps.models import ResponseLog
 
 
 class SimpleMiddleware:
     def addlog_get_response(self, request):
-        timeron = time()
+        # timeron = time()
         response = self.get_response(request)
-        timeroff = time()
+        # timeroff = time()
 
-        params = None
+        # params = None
 
-        if request.method == "GET":
-            params = request.GET
-        elif request.method == "POST":
-            params = request.POST
+        # if request.method == "GET":
+        #     params = request.GET
+        # elif request.method == "POST":
+        #     params = request.POST
 
-        ResponseLog.objects.create(
-            response_time=timeroff - timeron,
-            request_method=request.method,
-            query_params=params,
-            ip=request.META.get("REMOTE_ADDR"),
-            path=request.path
-        )
-        # ^ Saving information about requests
-        # req_info.save()
-        # ^ Do not this! is ResponseLog do it.
+        # ResponseLog.objects.create(
+        #     response_time=timeroff - timeron,
+        #     request_method=request.method,
+        #     query_params=params,
+        #     ip=request.META.get("REMOTE_ADDR"),
+        #     path=request.path
+        # )
+        # # ^ Saving information about requests
+        # # req_info.save()
+        # # ^ Do not this! is ResponseLog do it.
 
         return response
 
