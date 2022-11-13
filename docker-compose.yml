@@ -8,14 +8,52 @@ services:
     container_name: backend
     stdin_open: true
     tty: true
+    volumes:
+      - "./:/app/build"
+    env_file:
+      - .env
     ports:
       - "8000:8000"
+
+  celery:
+    image: django-local:0.0.1
+    build: .
+    container_name: celery
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    command: celery -A settings worker --loglevel=INFO --pidfile=/tmp/celery.pid
+
+  celerybeat:
+    image: django-local:0.0.1
+    build: .
+    container_name: celerybeat
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    command: celery -A settings beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule --pidfile=/tmp/celerybeat.pid
+
+  flower:
+    image: django-local:0.0.1
+    build: .
+    container_name: flower
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    command: celery -A settings flower --address=0.0.0.0 --port=5566
+    ports:
+      - "5566:5566"
 
   memcached:
     image: memcached:1.6.17
     container_name: memcached
     ports:
       - "11211:11211"
+    env_file:
+      - .env
 
   rabbitmq:
     image: rabbitmq:3.11.2-management
@@ -23,6 +61,8 @@ services:
     ports:
     - "5672:5672"
     - "15672:15672"
+    env_file:
+      - .env
 
   postgres:
     image: postgres:15.0-alpine
@@ -30,10 +70,8 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      POSGRRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespass128
-      POSTGRES_DB: postgresql_db
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
 
@@ -42,6 +80,17 @@ services:
     container_name: nginx
     ports:
       - "80:80"
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf:ro"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5050:80"
 
 volumes:
   db_data: {}

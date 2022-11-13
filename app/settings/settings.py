@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from django.urls import reverse_lazy
 from celery.schedules import crontab
@@ -23,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(a*bd_2a^a4q(1qltuoo=p+oqh2c*9gw=p$f7x=8utcgi3%)$-'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(';')
 
 
 # Application definition
@@ -108,9 +109,9 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgrespass128',
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'HOST': 'postgres',
         'PORT': '5432'
     }
@@ -119,7 +120,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211'
+        'LOCATION': f'{os.environ["MEMCACHED_HOST"]}:{os.environ.get("MEMCACHED_PORT", 11211)}'
     }
 }
 
@@ -201,7 +202,13 @@ HTTP_SHEM = 'http'
 DOMAIN = 'localhost:8000'
 # ^ Setted domain name
 
-CELERY_BROKER_URL = 'amqp://localhost'
+RABBITMQ_DEFAULT_USER = os.environ['RABBITMQ_DEFAULT_USER']
+RABBITMQ_DEFAULT_PASS = os.environ['RABBITMQ_DEFAULT_PASS']
+RABBITMQ_DEFAULT_HOST = os.environ.get('RABBITMQ_DEFAULT_HOST', 'localhost')
+RABBITMQ_DEFAULT_PORT = os.environ.get('RABBITMQ_DEFAULT_PORT', '5672')
+
+CELERY_BROKER_URL = f'amqp://{RABBITMQ_DEFAULT_USER}:{RABBITMQ_DEFAULT_PASS}@' \
+    f'{RABBITMQ_DEFAULT_HOST}:{RABBITMQ_DEFAULT_PORT}//'
 # ^ Setted broker url
 
 CELERY_BEAT_SCHEDULE = {
